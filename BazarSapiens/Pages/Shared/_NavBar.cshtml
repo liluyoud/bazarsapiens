@@ -1,0 +1,41 @@
+﻿<nav class="navbar navbar-expand-md  navbar-static ms-navbar ms-navbar-white">
+    <div class="container container-full">
+        <div class="navbar-header">
+            <a asp-page="/Index" class="navbar-brand">
+                <span class="ms-logo ms-logo-sm">B</span>
+                <span class="ms-title">Solidariedade</span>
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="ms-navbar">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown @PaginaHelper.PaginaAtual(ViewContext, "index", "active")">
+                    <a asp-page="/Index" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-hover="dropdown" role="button" aria-expanded="false">
+                        <i class="zmdi zmdi-home"></i> &nbsp; Início
+                    </a>
+                </li>
+                <li class="nav-item dropdown @PaginaHelper.PaginaAtual(ViewContext, "bazares", "active")">
+                    <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-hover="dropdown" role="button" aria-expanded="false">
+                        <i class="zmdi zmdi-case"></i> &nbsp; Bazares
+                    </a>
+                </li>
+                <li class="nav-item dropdown @PaginaHelper.PaginaAtual(ViewContext, "parceiros", "active")">
+                    <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-hover="dropdown" role="button" aria-expanded="false">
+                        <i class="zmdi zmdi-accounts"></i> &nbsp; Parceiros
+                    </a>
+                </li>
+                <li class="nav-item dropdown @PaginaHelper.PaginaAtual(ViewContext, "noticias", "active")">
+                    <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-hover="dropdown" role="button" aria-expanded="false">
+                        <i class="zmdi zmdi-cast-connected"></i> &nbsp; Notícias
+                    </a>
+                </li>
+                <li class="nav-item dropdown @PaginaHelper.PaginaAtual(ViewContext, "sobre", "active")">
+                    <a asp-page="/Sobre" class="nav-link dropdown-toggle animated fadeIn animation-delay-8" data-hover="dropdown" role="button" aria-expanded="false">
+                        <i class="zmdi zmdi-library"></i> &nbsp; Sobre
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <a href="javascript:void(0)" class="ms-toggle-left btn-navbar-menu"><i class="zmdi zmdi-menu"></i></a>
+    </div> <!-- container -->
+</nav>
