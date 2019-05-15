@@ -1,0 +1,18 @@
+Aula 4
+
+Startup.cs: 
+ . inserir IConfiguration
+ . inserir IHostingEnvironment
+ . inserir Construtor
+
+appsettings.json
+appsettings.development.json
+ . criar connectionstrings
+
+
+Importar nuget Microsoft.EntityFrameworkCore.Sqlite
+
+Criar Categoria.cs / BazarContext.cs
+
+
+
