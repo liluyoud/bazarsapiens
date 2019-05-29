@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#333">
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="Bazar da Solidariedade">
+    <link rel="shortcut icon" href="~/favicon.png?v=3">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="~/assets/css/preload.min.css">
+    <link rel="stylesheet" href="~/assets/css/plugins.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.light-blue-500.min.css">
+
+    @RenderSection("Head", required: false)
+
+    <!--[if lt IE 9]>
+        <script src="~/assets/js/html5shiv.min.js"></script>
+        <script src="~/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    <div id="ms-preload" class="ms-preload">
+        <div id="status">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ms-site-container">
+        <partial name="_Login" />
+        <partial name="_Header" />
+        <partial name="_NavBar" />
+        
+        <div class="material-background"></div>
+
+        <div class="container container-full">
+            <div class="ms-paper">
+                <div class="row">
+                    <div class="col-lg-3 ms-paper-menu-left-container">
+                        <partial name="_NavAdmin" />
+                    </div>
+                    <div class="col-lg-9 ms-paper-content-container">
+                        <div class="ms-paper-content">
+                            <session class="ms-component-section">
+                                @RenderBody()
+                            </session>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <partial name="_Footer" />
+        <partial name="_SideBar" />
+    </div>
+    
+
+    <script src="~/assets/js/plugins.min.js"></script>
+    <script src="~/assets/js/app.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
