@@ -1,35 +1,29 @@
-﻿@page
+﻿@page "{id}"
 @model BazarSapiens.Pages.Admin.Categorias.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Categoria";
 }
 
-<h1>Edit</h1>
+<h1>Editar Categoria</h1>
 
-<h4>Categoria</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Categoria.Id" />
-            <div class="form-group">
-                <label asp-for="Categoria.Descricao" class="control-label"></label>
-                <input asp-for="Categoria.Descricao" class="form-control" />
-                <span asp-validation-for="Categoria.Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<form method="post" class="form-horizontal" autocomplete="off">
+    <fieldset>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+        <div class="form-group label-floating">
+            <label asp-for="Categoria.Id" class="control-label">Id da Categoria</label>
+            <input asp-for="Categoria.Id" class="form-control" readonly />
+        </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        <div class="form-group label-floating">
+            <label asp-for="Categoria.Descricao" class="control-label">Descrição da Categoria</label>
+            <input asp-for="Categoria.Descricao" class="form-control" />
+            <span asp-validation-for="Categoria.Descricao" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Salvar Alterações" class="btn btn-raised btn-primary" /> &nbsp;&nbsp;
+            <a asp-page="./Index">Retornar</a>
+        </div>
+    </fieldset>
+</form>

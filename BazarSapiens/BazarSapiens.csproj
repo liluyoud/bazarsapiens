@@ -15,6 +15,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\assets\media\" />
     <Folder Include="wwwroot\assets\plugins\revolution\assets\gridimages\" />
+    <Folder Include="wwwroot\fotos\" />
   </ItemGroup>
 
 </Project>

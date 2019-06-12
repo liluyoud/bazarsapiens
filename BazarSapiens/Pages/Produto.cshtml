@@ -1,0 +1,86 @@
+﻿@page "{id}"
+@model BazarSapiens.Pages.ProdutoModel
+
+@{
+    ViewData["Title"] = "Bazar - Produto";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div id="carousel-product" class="ms-carousel ms-carousel-thumb carousel slide animated zoomInUp animation-delay-5" data-ride="carousel" data-interval="0">
+                <div class="card card-body">
+                    <div class="carousel-inner" role="listbox">
+                        @{
+                            var i = 0;
+                            foreach (var item in Model.Fotos)
+                            {
+                                var ativo = (i++ == 0) ? "active" : "";
+                                <div class="carousel-item @ativo">
+                                    <img src="~/fotos/@item" alt="@item" class="img-fluid">
+                                </div>
+                                if (i == 5)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+                <!-- Indicators -->
+                <ol class="carousel-indicators carousel-indicators-tumbs carousel-indicators-tumbs-outside">
+                    @{
+                        var j = 0;
+                        foreach (var item in Model.Fotos)
+                        {
+                            var ativo = (j == 0) ? "active" : "";
+                            <li data-target="#carousel-product" data-slide-to="@j" class="@ativo">
+                                <img src="~/fotos/@item" alt="@item" width="80px">
+                            </li>
+                            j++;
+                            if (j == 5)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                </ol>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card animated zoomInDown animation-delay-5">
+                <div class="card-body">
+                    <h2>@Model.Produto.Nome</h2>
+                    <div class="mb-2 mt-4">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h3 class="no-m text-normal">@Model.Produto.Categoria.Descricao.ToUpper()</h3>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <h2 class="color-success no-m text-normal">$ @Model.Produto.ValorInicial</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lead">
+                        Dolorum culpa temporibus illum ab esse est, eligendi fugit veniam excepturi modi minus, atque ipsam magni incidunt sed, quia hic dolore quos.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <strong>Valor do lance: </strong>@Model.Produto.ValorLance
+                        </li>
+                        <li>
+                            <strong>Total de lances: </strong>@Model.Produto.QuantidadeLances
+                        </li>
+                        <li>
+                            <strong>Valor Inicial: </strong>@Model.Produto.ValorInicial
+                        </li>
+                    </ul>
+                    <a href="javascript:void(0)" class="btn btn-primary btn-block btn-raised mt-2 no-mb">
+                        <i class="zmdi zmdi-shopping-cart-plus"></i> Dar um lance
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

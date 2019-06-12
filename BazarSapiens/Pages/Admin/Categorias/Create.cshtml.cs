@@ -11,9 +11,9 @@ namespace BazarSapiens.Pages.Admin.Categorias
 {
     public class CreateModel : PageModel
     {
-        private readonly BazarSapiens.Models.BazarContext _context;
+        private readonly BazarContext _context;
 
-        public CreateModel(BazarSapiens.Models.BazarContext context)
+        public CreateModel(BazarContext context)
         {
             _context = context;
         }

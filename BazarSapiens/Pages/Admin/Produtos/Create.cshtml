@@ -1,0 +1,88 @@
+﻿@page
+@model BazarSapiens.Pages.Admin.Produtos.CreateModel
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<h1>Adicionar Produto</h1>
+
+<form method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label asp-for="Produto.Nome" class="control-label">Nome do Produto</label>
+                <input asp-for="Produto.Nome" class="form-control" />
+                <span asp-validation-for="Produto.Nome" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Produto.CategoriaId" class="control-label">Categoria do Produto</label>
+                <select asp-for="Produto.CategoriaId" asp-items="@Model.Categorias" class="form-control selectpicker" data-dropup-auto="false">
+                    <option value="" disabled selected>Selecione uma categoria</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Produto.Estado" class="control-label">Estado do Produto</label>
+                <select asp-for="Produto.Estado" class="form-control selectpicker" data-dropup-auto="false">
+                    <option value="" disabled selected>Selecione o estado do produto</option>
+                    <option value="Novo">Novo</option>
+                    <option value="Usado">Usado</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Produto.ValorInicial" class="control-label">Valor Inicial</label>
+                <input asp-for="Produto.ValorInicial" pattern="^[0-9]+(,[0-9]{1,2})?$" class="form-control" />
+                <span asp-validation-for="Produto.ValorInicial" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Produto.ValorLance" class="control-label">Valor do Lance</label>
+                <input asp-for="Produto.ValorLance" pattern="^[0-9]+(,[0-9]{1,2})?$" class="form-control" />
+                <span asp-validation-for="Produto.ValorLance" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label asp-for="Produto.Descricao" class="control-label">Descrição do Produto</label>
+                <textarea asp-for="Produto.Descricao" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label asp-for="Arquivos" class="control-label">Fotos do produto</label>
+                <input type="text" readonly="" class="form-control" placeholder="Selecione as fotos do produto...">
+                <input type="file" asp-for="Arquivos" multiple>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Adicionar" class="btn btn-raised btn-primary" /> &nbsp;&nbsp;
+        <a asp-page="Index">Voltar a lista de produtos</a>
+    </div>
+</form>
+
+@section Head
+{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+}
+
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script>
+        var simplemde = new SimpleMDE({ element: document.getElementById("Produto_Descricao") });
+    </script>
+}

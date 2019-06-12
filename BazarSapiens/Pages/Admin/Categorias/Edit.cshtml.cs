@@ -12,9 +12,9 @@ namespace BazarSapiens.Pages.Admin.Categorias
 {
     public class EditModel : PageModel
     {
-        private readonly BazarSapiens.Models.BazarContext _context;
+        private readonly BazarContext _context;
 
-        public EditModel(BazarSapiens.Models.BazarContext context)
+        public EditModel(BazarContext context)
         {
             _context = context;
         }
@@ -70,5 +70,5 @@ namespace BazarSapiens.Pages.Admin.Categorias
         {
             return _context.Categorias.Any(e => e.Id == id);
         }
-    }
+    }   
 }

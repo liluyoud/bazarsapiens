@@ -18,11 +18,11 @@ namespace BazarSapiens.Pages.Admin.Categorias
             _context = context;
         }
 
-        public IList<Categoria> Categoria { get;set; }
+        public IList<Categoria> Categorias { get;set; }
 
         public async Task OnGetAsync()
         {
-            Categoria = await _context.Categorias.ToListAsync();
+            Categorias = await _context.Categorias.ToListAsync();
         }
     }
 }

@@ -1,0 +1,160 @@
+﻿@page "{id}"
+@model BazarSapiens.Pages.Admin.Produtos.EditModel
+
+@{
+    ViewData["Title"] = "Editar Produto";
+}
+
+<h1>Editar Produto</h1>
+
+<form method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <input asp-for="Produto.Id" hidden />
+                <input asp-for="Produto.TotalFotos" hidden />
+
+                <label asp-for="Produto.Nome" class="control-label">Produto</label>
+                <input asp-for="Produto.Nome" class="form-control" />
+                <span asp-validation-for="Produto.Nome" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Produto.CategoriaId" class="control-label">Categoria do Produto</label>
+                <select asp-for="Produto.CategoriaId" asp-items="@Model.Categorias" class="form-control selectpicker" data-dropup-auto="false">
+                    <option value="" disabled selected>Selecione uma categoria</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Produto.Estado" class="control-label">Estado do Produto</label>
+                <select asp-for="Produto.Estado" class="form-control selectpicker" data-dropup-auto="false">
+                    <option value="" disabled selected>Selecione o estado do produto</option>
+                    <option value="Novo">Novo</option>
+                    <option value="Usado">Usado</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Produto.ValorInicial" class="control-label">Valor Inicial</label>
+                <input asp-for="Produto.ValorInicial" pattern="^[0-9]+(,[0-9]{1,2})?$" class="form-control" />
+                <span asp-validation-for="Produto.ValorInicial" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Produto.ValorLance" class="control-label">Valor do Lance</label>
+                <input asp-for="Produto.ValorLance" pattern="^[0-9]+(,[0-9]{1,2})?$" class="form-control" />
+                <span asp-validation-for="Produto.ValorLance" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Produto.ValorAtual" class="control-label">Valor Atual</label>
+                <input asp-for="Produto.ValorAtual" pattern="^[0-9]+(,[0-9]{1,2})?$" class="form-control" readonly />
+                <span asp-validation-for="Produto.ValorAtual" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Produto.QuantidadeLances" class="control-label">Quantidade de Lances</label>
+                <input asp-for="Produto.QuantidadeLances" type="number" class="form-control" readonly />
+                <span asp-validation-for="Produto.QuantidadeLances" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label asp-for="Produto.Descricao" class="control-label">Descrição do Produto</label>
+                <textarea asp-for="Produto.Descricao" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="section-title no-margin-top">Fotos do Produto</h2>
+    <div class="row">
+
+        @foreach (var item in Model.Fotos)
+        {
+            <div class="col-lg-3">
+                <div class="card">
+                    <div class="withripple zoom-img">
+                        <a href="javascript:void(0);">
+                            <img src="~/fotos/@item" alt="@item" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="card-body overflow-hidden text-center">
+                        @if (item == Model.Produto.FotoPrincipal)
+                        {
+                            <a href="javascript:void(0)" class="btn-circle btn-circle-primary btn-circle-raised btn-card-float wow zoomInDown">
+                                <i class="zmdi zmdi-star"></i>
+                            </a>
+                            <h4 class="color-primary">@item</h4>
+                        }
+                        else
+                        {
+                            <a href="javascript:void(0)" class="btn-circle btn-circle-danger btn-circle-raised btn-card-float wow zoomInDown">
+                                <i class="zmdi zmdi-delete"></i>
+                            </a>
+                            <h4 class="color-danger">@item</h4>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label asp-for="Produto.FotoPrincipal" class="control-label">Foto Principal</label>
+                <select asp-for="Produto.FotoPrincipal" class="form-control selectpicker" data-dropup-auto="false">
+                    @foreach (var item in Model.Fotos)
+                    {
+                        if (item == Model.Produto.FotoPrincipal)
+                        {
+                            <option value="@item" selected>@item</option>
+                        }
+                        else
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label asp-for="Arquivos" class="control-label">Adicionar novas fotos do produto</label>
+                <input type="text" readonly="" class="form-control" placeholder="Selecione as novas fotos para adicionar...">
+                <input type="file" asp-for="Arquivos" multiple>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Salvar as alterações" class="btn btn-raised btn-primary" /> &nbsp;&nbsp;
+        <a asp-page="Index">Voltar a lista de produtos</a>
+    </div>
+</form>
+
+@section Head
+{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+}
+
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script>
+        var simplemde = new SimpleMDE({ element: document.getElementById("Produto_Descricao") });
+    </script>
+}

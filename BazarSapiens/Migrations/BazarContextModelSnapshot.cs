@@ -28,6 +28,52 @@ namespace BazarSapiens.Migrations
 
                     b.ToTable("Categorias");
                 });
+
+            modelBuilder.Entity("BazarSapiens.Models.Produto", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CategoriaId");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(5000);
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.Property<int>("FotoPrincipal");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<int>("QuantidadeLances");
+
+                    b.Property<int>("TotalFotos");
+
+                    b.Property<decimal>("ValorAtual");
+
+                    b.Property<decimal>("ValorInicial");
+
+                    b.Property<decimal>("ValorLance");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.ToTable("Produtos");
+                });
+
+            modelBuilder.Entity("BazarSapiens.Models.Produto", b =>
+                {
+                    b.HasOne("BazarSapiens.Models.Categoria", "Categoria")
+                        .WithMany("Produtos")
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 #pragma warning restore 612, 618
         }
     }

@@ -2,35 +2,35 @@
 @model BazarSapiens.Pages.Admin.Categorias.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Categorias";
 }
 
-<h1>Index</h1>
+<h1>Categorias</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria[0].Descricao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Categoria) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<a asp-page="Create" class="btn btn-raised btn-info">Adicionar Categoria</a>
+
+<div class="card">
+    <table class="table table-no-border">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Categoria</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categorias)
+            {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Descricao</td>
+                <td width="30">
+                    <a asp-page="./Edit" asp-route-id="@item.Id" title="Editar">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
