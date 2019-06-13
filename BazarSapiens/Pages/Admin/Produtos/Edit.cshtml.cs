@@ -41,9 +41,13 @@ namespace BazarSapiens.Pages.Admin.Produtos
                 return NotFound();
             }
 
-            Categorias = new SelectList(_context.Categorias.ToList(), "Id", "Descricao");
-
             Produto = await _context.Produtos.FirstOrDefaultAsync(m => m.Id == id);
+            if (Produto == null)
+            {
+                return NotFound();
+            }
+
+            Categorias = new SelectList(_context.Categorias.ToList(), "Id", "Descricao");
 
             Fotos = new List<string>();
 
@@ -57,10 +61,7 @@ namespace BazarSapiens.Pages.Admin.Produtos
                 }
             }
 
-            if (Produto == null)
-            {
-                return NotFound();
-            }
+            
             return Page();
         }
 
