@@ -2,23 +2,22 @@
 
 namespace BazarSapiens.Migrations
 {
-    public partial class Estado : Migration
+    public partial class NoticiasFotos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Estado",
-                table: "Produtos",
-                maxLength: 10,
+            migrationBuilder.AddColumn<int>(
+                name: "TotalFotos",
+                table: "Noticias",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Estado",
-                table: "Produtos");
+                name: "TotalFotos",
+                table: "Noticias");
         }
     }
 }

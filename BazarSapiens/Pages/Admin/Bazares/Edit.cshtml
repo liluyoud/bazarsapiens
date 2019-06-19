@@ -1,0 +1,78 @@
+﻿@page "{id}"
+@model BazarSapiens.Pages.Admin.Bazares.EditModel
+
+@{
+    ViewData["Title"] = "Editar Bazar";
+}
+
+<h1>Editar Bazar</h1>
+
+<form method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <input asp-for="Bazar.Id" hidden />
+
+                <label asp-for="Bazar.Nome" class="control-label">Nome do Bazar</label>
+                <input asp-for="Bazar.Nome" class="form-control" />
+                <span asp-validation-for="Bazar.Nome" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Bazar.Inicio" class="control-label">Início do Bazar</label>
+                <input asp-for="Bazar.Inicio" type="date" class="form-control" />
+                <span asp-validation-for="Bazar.Inicio" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Bazar.Fim" class="control-label">Fim do Bazar</label>
+                <input asp-for="Bazar.Fim" type="date" class="form-control" />
+                <span asp-validation-for="Bazar.Fim" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label asp-for="Bazar.Descricao" class="control-label">Informações sobre o Bazar</label>
+                <textarea asp-for="Bazar.Descricao" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label class="control-label">Logotipo</label><br />
+                <img src="~/bazares/@Model.Logotipo" alt="@Model.Logotipo" class="img-fluid">
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label asp-for="Arquivo" class="control-label">Selecione um novo logotipo</label>
+                <input type="text" readonly="" class="form-control" placeholder="Caso queira alterar, selecione um novo logotipo...">
+                <input type="file" asp-for="Arquivo">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" value="Salvar as alterações" class="btn btn-raised btn-primary" /> &nbsp;&nbsp;
+            <a asp-page="Index">Voltar a lista de bazares</a>
+        </div>
+    </div>
+</form>
+
+@section Head
+{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+}
+
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script>
+        var simplemde = new SimpleMDE({ element: document.getElementById("Bazar_Descricao") });
+    </script>
+}

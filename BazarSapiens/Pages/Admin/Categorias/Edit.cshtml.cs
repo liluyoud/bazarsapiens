@@ -22,7 +22,7 @@ namespace BazarSapiens.Pages.Admin.Categorias
         [BindProperty]
         public Categoria Categoria { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(long? id)
         {
             if (id == null)
             {
@@ -66,7 +66,7 @@ namespace BazarSapiens.Pages.Admin.Categorias
             return RedirectToPage("./Index");
         }
 
-        private bool CategoriaExists(int id)
+        private bool CategoriaExists(long id)
         {
             return _context.Categorias.Any(e => e.Id == id);
         }

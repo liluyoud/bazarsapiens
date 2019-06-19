@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BazarSapiens.Models;
+using Markdig;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -28,6 +29,8 @@ namespace BazarSapiens.Pages
 
         public List<string> Fotos { get; set; }
 
+        public string Descricao { get; set; }
+
         public async Task<IActionResult> OnGetAsync(long? id)
         {
             if (id == null)
@@ -37,13 +40,16 @@ namespace BazarSapiens.Pages
 
             Produto = await _context.Produtos.Include(p => p.Categoria).FirstOrDefaultAsync(m => m.Id == id);
 
+            Descricao = Markdown.ToHtml(Produto.Descricao);
+
             Fotos = new List<string>();
 
-            var diretorio = Path.Combine(_ambiente.WebRootPath, "fotos");
+            var diretorio = Path.Combine(_ambiente.WebRootPath, "produtos");
             var di = new DirectoryInfo(diretorio);
 
             // coloca a foto principal como o primeiro da lista
-            Fotos.Add(Produto.FotoPrincipal);
+            if (Produto.FotoPrincipal != null)
+                Fotos.Add(Produto.FotoPrincipal);
             foreach (var f in di.GetFiles())
             {
                 if (f.Name.StartsWith(id + "-") && f.Name != Produto.FotoPrincipal)

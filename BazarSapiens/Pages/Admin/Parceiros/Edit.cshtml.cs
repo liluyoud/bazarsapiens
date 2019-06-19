@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
-namespace BazarSapiens.Pages.Admin.Produtos
+namespace BazarSapiens.Pages.Admin.Parceiros
 {
     public class EditModel : PageModel
     {
@@ -25,14 +25,12 @@ namespace BazarSapiens.Pages.Admin.Produtos
         }
 
         [BindProperty]
-        public Produto Produto { get; set; }
-
-        public SelectList Categorias { set; get; }
+        public Parceiro Parceiro { get; set; }
 
         [BindProperty]
-        public List<IFormFile> Arquivos { get; set; }
+        public IFormFile Arquivo { get; set; }
 
-        public List<string> Fotos { get; set; }
+        public string Logotipo { get; set; }
 
         public async Task<IActionResult> OnGetAsync(long? id)
         {
@@ -41,27 +39,23 @@ namespace BazarSapiens.Pages.Admin.Produtos
                 return NotFound();
             }
 
-            Produto = await _context.Produtos.FirstOrDefaultAsync(m => m.Id == id);
-            if (Produto == null)
+            Parceiro = await _context.Parceiros.FirstOrDefaultAsync(m => m.Id == id);
+            if (Parceiro == null)
             {
                 return NotFound();
             }
 
-            Categorias = new SelectList(_context.Categorias.ToList(), "Id", "Descricao");
-
-            Fotos = new List<string>();
-
-            var diretorio = Path.Combine(_ambiente.WebRootPath, "produtos");
+            var diretorio = Path.Combine(_ambiente.WebRootPath, "parceiros");
             var di = new DirectoryInfo(diretorio);
             foreach (var f in di.GetFiles())
             {
-                if (f.Name.StartsWith(id + "-"))
+                if (f.Name.StartsWith(id + "."))
                 {
-                    Fotos.Add(f.Name);
+                    Logotipo = f.Name;
+                    break;
                 }
             }
 
-            
             return Page();
         }
 
@@ -72,30 +66,27 @@ namespace BazarSapiens.Pages.Admin.Produtos
                 return Page();
             }
 
-            _context.Attach(Produto).State = EntityState.Modified;
+            _context.Attach(Parceiro).State = EntityState.Modified;
 
             try
             {
-                int i = Produto.TotalFotos;
-                foreach (var arquivo in Arquivos)
+              
+                if (Arquivo.Length > 0)
                 {
-                    if (arquivo.Length > 0)
+                    var extensao = Path.GetExtension(Arquivo.FileName);
+                    var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "bazares", Parceiro.Id + extensao);
+                    using (var stream = new FileStream(nomeArquivo, FileMode.Create))
                     {
-                        var extensao = Path.GetExtension(arquivo.FileName);
-                        var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "produtos", Produto.Id + "-" + ++i + extensao);
-                        using (var stream = new FileStream(nomeArquivo, FileMode.Create))
-                        {
-                            arquivo.CopyTo(stream);
-                            stream.Close();
-                        }
+                        Arquivo.CopyTo(stream);
+                        stream.Close();
                     }
                 }
-                Produto.TotalFotos = i;
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProdutoExists(Produto.Id))
+                if (!ParceiroExists(Parceiro.Id))
                 {
                     return NotFound();
                 }
@@ -105,12 +96,12 @@ namespace BazarSapiens.Pages.Admin.Produtos
                 }
             }
 
-            return RedirectToPage("./Edit", new { Id = Produto.Id });
+            return RedirectToPage("./Edit", new { Id = Parceiro.Id });
         }
 
-        private bool ProdutoExists(long id)
+        private bool ParceiroExists(long id)
         {
-            return _context.Produtos.Any(e => e.Id == id);
+            return _context.Parceiros.Any(e => e.Id == id);
         }
     }   
 }

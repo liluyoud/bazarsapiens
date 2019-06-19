@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
-namespace BazarSapiens.Pages.Admin.Produtos
+namespace BazarSapiens.Pages.Admin.Noticias
 {
     public class CreateModel : PageModel
     {
@@ -25,14 +25,11 @@ namespace BazarSapiens.Pages.Admin.Produtos
 
         public IActionResult OnGet()
         {
-            Categorias = new SelectList(_context.Categorias.ToList(), "Id", "Descricao");
             return Page();
         }
 
         [BindProperty]
-        public Produto Produto { get; set; }
-
-        public SelectList Categorias { set; get; }
+        public Noticia Noticia { get; set; }
 
         [BindProperty]
         public List<IFormFile> Arquivos { get; set; }
@@ -47,9 +44,9 @@ namespace BazarSapiens.Pages.Admin.Produtos
             // atualizar para quando tiver mais de 1 bazar acontecendo ao mesmo tempo
             var bazar = _context.Bazares.OrderByDescending(b => b.Id).FirstOrDefault(b => b.Situacao != SituacaoBazar.Finalizado && b.Situacao != SituacaoBazar.Cancelado);
             if (bazar != null)
-                Produto.BazarId = bazar.Id;
+                Noticia.BazarId = bazar.Id;
 
-            _context.Produtos.Add(Produto);
+            _context.Noticias.Add(Noticia);
             await _context.SaveChangesAsync();
             int i = 0;
             foreach (var arquivo in Arquivos)
@@ -57,7 +54,7 @@ namespace BazarSapiens.Pages.Admin.Produtos
                 if (arquivo.Length > 0)
                 {
                     var extensao = Path.GetExtension(arquivo.FileName); 
-                    var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "produtos", Produto.Id + "-" + ++i + extensao);
+                    var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "noticias", Noticia.Id + "-" + ++i + extensao);
                     using (var stream = new FileStream(nomeArquivo, FileMode.Create))
                     {
                         arquivo.CopyTo(stream);
@@ -65,11 +62,11 @@ namespace BazarSapiens.Pages.Admin.Produtos
                     }
                     if (i == 1)
                     {
-                        Produto.FotoPrincipal = Produto.Id + "-1" + extensao;
+                        Noticia.FotoPrincipal = Noticia.Id + "-1" + extensao;
                     }
                 }
             }
-            Produto.TotalFotos = i;
+            Noticia.TotalFotos = i;
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

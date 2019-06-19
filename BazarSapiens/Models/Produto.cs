@@ -28,17 +28,23 @@ namespace BazarSapiens.Models
 
         public int QuantidadeLances { get; set; }
 
+        public int Visualizacoes { get; set; }
+
         public int TotalFotos { get; set; }
 
         public string FotoPrincipal { get; set; }
-
-        public Categoria Categoria { get; set; }
 
         [Required]
         [StringLength(10)]
         public string Estado { get; set; }
 
-        [Required]
-        public int CategoriaId { get; set; }
+        public Categoria Categoria { get; set; }
+
+        public long CategoriaId { get; set; }
+
+        public Bazar Bazar { get; set; }
+
+        public long BazarId { get; set; }
+
     }
 }

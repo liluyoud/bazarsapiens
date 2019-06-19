@@ -1,0 +1,38 @@
+﻿@page
+@model BazarSapiens.Pages.Admin.Bazares.IndexModel
+
+@{
+    ViewData["Title"] = "Bazares";
+}
+
+<h1>Bazares</h1>
+
+<a asp-page="Create" class="btn btn-raised btn-info">Adicionar Bazar</a>
+
+<div class="card">
+    <table class="table table-no-border">
+        <thead>
+            <tr>
+                <th>Bazar</th>
+                <th>Início</th>
+                <th>Fim</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Bazares)
+            {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Inicio.ToString("dd/MM/yy")</td>
+                <td>@item.Fim.ToString("dd/MM/yy")</td>
+                <td width="30">
+                    <a asp-page="./Edit" asp-route-id="@item.Id" title="Editar">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

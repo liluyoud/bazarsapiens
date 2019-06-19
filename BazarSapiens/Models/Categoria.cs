@@ -5,7 +5,7 @@ namespace BazarSapiens.Models
 {
     public class Categoria
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         [StringLength(50)]

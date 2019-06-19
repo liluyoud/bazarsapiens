@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
-namespace BazarSapiens.Pages.Admin.Produtos
+namespace BazarSapiens.Pages.Admin.Parceiros
 {
     public class CreateModel : PageModel
     {
@@ -25,17 +25,15 @@ namespace BazarSapiens.Pages.Admin.Produtos
 
         public IActionResult OnGet()
         {
-            Categorias = new SelectList(_context.Categorias.ToList(), "Id", "Descricao");
             return Page();
         }
 
         [BindProperty]
-        public Produto Produto { get; set; }
+        public Parceiro Parceiro { get; set; }
 
-        public SelectList Categorias { set; get; }
 
         [BindProperty]
-        public List<IFormFile> Arquivos { get; set; }
+        public IFormFile Arquivo { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -47,30 +45,20 @@ namespace BazarSapiens.Pages.Admin.Produtos
             // atualizar para quando tiver mais de 1 bazar acontecendo ao mesmo tempo
             var bazar = _context.Bazares.OrderByDescending(b => b.Id).FirstOrDefault(b => b.Situacao != SituacaoBazar.Finalizado && b.Situacao != SituacaoBazar.Cancelado);
             if (bazar != null)
-                Produto.BazarId = bazar.Id;
+                Parceiro.BazarId = bazar.Id;
 
-            _context.Produtos.Add(Produto);
+            _context.Parceiros.Add(Parceiro);
             await _context.SaveChangesAsync();
-            int i = 0;
-            foreach (var arquivo in Arquivos)
+            if (Arquivo.Length > 0)
             {
-                if (arquivo.Length > 0)
+                var extensao = Path.GetExtension(Arquivo.FileName); 
+                var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "parceiros", Parceiro.Id + extensao);
+                using (var stream = new FileStream(nomeArquivo, FileMode.Create))
                 {
-                    var extensao = Path.GetExtension(arquivo.FileName); 
-                    var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "produtos", Produto.Id + "-" + ++i + extensao);
-                    using (var stream = new FileStream(nomeArquivo, FileMode.Create))
-                    {
-                        arquivo.CopyTo(stream);
-                        stream.Close();
-                    }
-                    if (i == 1)
-                    {
-                        Produto.FotoPrincipal = Produto.Id + "-1" + extensao;
-                    }
+                    Arquivo.CopyTo(stream);
+                    stream.Close();
                 }
             }
-            Produto.TotalFotos = i;
-            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

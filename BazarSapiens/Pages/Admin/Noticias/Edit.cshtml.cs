@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
-namespace BazarSapiens.Pages.Admin.Produtos
+namespace BazarSapiens.Pages.Admin.Noticias
 {
     public class EditModel : PageModel
     {
@@ -25,9 +25,7 @@ namespace BazarSapiens.Pages.Admin.Produtos
         }
 
         [BindProperty]
-        public Produto Produto { get; set; }
-
-        public SelectList Categorias { set; get; }
+        public Noticia Noticia { get; set; }
 
         [BindProperty]
         public List<IFormFile> Arquivos { get; set; }
@@ -41,17 +39,15 @@ namespace BazarSapiens.Pages.Admin.Produtos
                 return NotFound();
             }
 
-            Produto = await _context.Produtos.FirstOrDefaultAsync(m => m.Id == id);
-            if (Produto == null)
+            Noticia = await _context.Noticias.FirstOrDefaultAsync(m => m.Id == id);
+            if (Noticia == null)
             {
                 return NotFound();
             }
 
-            Categorias = new SelectList(_context.Categorias.ToList(), "Id", "Descricao");
-
             Fotos = new List<string>();
 
-            var diretorio = Path.Combine(_ambiente.WebRootPath, "produtos");
+            var diretorio = Path.Combine(_ambiente.WebRootPath, "noticias");
             var di = new DirectoryInfo(diretorio);
             foreach (var f in di.GetFiles())
             {
@@ -72,17 +68,17 @@ namespace BazarSapiens.Pages.Admin.Produtos
                 return Page();
             }
 
-            _context.Attach(Produto).State = EntityState.Modified;
+            _context.Attach(Noticia).State = EntityState.Modified;
 
             try
             {
-                int i = Produto.TotalFotos;
+                int i = Noticia.TotalFotos;
                 foreach (var arquivo in Arquivos)
                 {
                     if (arquivo.Length > 0)
                     {
                         var extensao = Path.GetExtension(arquivo.FileName);
-                        var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "produtos", Produto.Id + "-" + ++i + extensao);
+                        var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "noticias", Noticia.Id + "-" + ++i + extensao);
                         using (var stream = new FileStream(nomeArquivo, FileMode.Create))
                         {
                             arquivo.CopyTo(stream);
@@ -90,12 +86,12 @@ namespace BazarSapiens.Pages.Admin.Produtos
                         }
                     }
                 }
-                Produto.TotalFotos = i;
+                Noticia.TotalFotos = i;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProdutoExists(Produto.Id))
+                if (!NoticiaExists(Noticia.Id))
                 {
                     return NotFound();
                 }
@@ -105,12 +101,12 @@ namespace BazarSapiens.Pages.Admin.Produtos
                 }
             }
 
-            return RedirectToPage("./Edit", new { Id = Produto.Id });
+            return RedirectToPage("./Edit", new { Id = Noticia.Id });
         }
 
-        private bool ProdutoExists(long id)
+        private bool NoticiaExists(long id)
         {
-            return _context.Produtos.Any(e => e.Id == id);
+            return _context.Noticias.Any(e => e.Id == id);
         }
     }   
 }

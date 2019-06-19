@@ -17,7 +17,7 @@
                             {
                                 var ativo = (i++ == 0) ? "active" : "";
                                 <div class="carousel-item @ativo">
-                                    <img src="~/fotos/@item" alt="@item" class="img-fluid">
+                                    <img src="~/produtos/@item" alt="@item" class="img-fluid">
                                 </div>
                                 if (i == 5)
                                 {
@@ -35,7 +35,7 @@
                         {
                             var ativo = (j == 0) ? "active" : "";
                             <li data-target="#carousel-product" data-slide-to="@j" class="@ativo">
-                                <img src="~/fotos/@item" alt="@item" width="80px">
+                                <img src="~/produtos/@item" alt="@item" width="80">
                             </li>
                             j++;
                             if (j == 5)
@@ -55,15 +55,15 @@
                     <div class="mb-2 mt-4">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h3 class="no-m text-normal">@Model.Produto.Categoria.Descricao.ToUpper()</h3>
+                                <h3 class="no-m text-info">@Model.Produto.Categoria.Descricao.ToUpper()</h3>
                             </div>
                             <div class="col-sm-6 text-center">
                                 <h2 class="color-success no-m text-normal">$ @Model.Produto.ValorInicial</h2>
                             </div>
                         </div>
                     </div>
-                    <p class="lead">
-                        Dolorum culpa temporibus illum ab esse est, eligendi fugit veniam excepturi modi minus, atque ipsam magni incidunt sed, quia hic dolore quos.
+                    <p class="lead" id="produtoDescricao">
+                        @Html.Raw(Model.Descricao)
                     </p>
                     <ul class="list-unstyled">
                         <li>
@@ -84,3 +84,5 @@
         </div>
     </div>
 </div>
+
+
