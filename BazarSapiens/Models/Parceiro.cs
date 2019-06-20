@@ -16,6 +16,8 @@ namespace BazarSapiens.Models
 
         public string Descricao { get; set; }
 
+        public string Url { get; set; }
+
         public Bazar Bazar { get; set; }
 
         public long BazarId { get; set; }
