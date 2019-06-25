@@ -40,11 +40,11 @@ namespace BazarSapiens.Models
 
         public Categoria Categoria { get; set; }
 
-        public long CategoriaId { get; set; }
+        public long? CategoriaId { get; set; }
 
         public Bazar Bazar { get; set; }
 
-        public long BazarId { get; set; }
+        public long? BazarId { get; set; }
 
     }
 }

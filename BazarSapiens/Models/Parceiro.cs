@@ -20,7 +20,7 @@ namespace BazarSapiens.Models
 
         public Bazar Bazar { get; set; }
 
-        public long BazarId { get; set; }
+        public long? BazarId { get; set; }
 
         public int Visualizacoes { get; set; }
     }

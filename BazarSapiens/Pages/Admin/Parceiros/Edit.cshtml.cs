@@ -71,7 +71,7 @@ namespace BazarSapiens.Pages.Admin.Parceiros
             try
             {
               
-                if (Arquivo.Length > 0)
+                if (Arquivo?.Length > 0)
                 {
                     var extensao = Path.GetExtension(Arquivo.FileName);
                     var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "bazares", Parceiro.Id + extensao);
