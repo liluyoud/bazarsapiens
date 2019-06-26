@@ -16,6 +16,29 @@ namespace BazarSapiens.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
+            modelBuilder.Entity("BazarSapiens.Models.Banner", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Conteúdo");
+
+                    b.Property<string>("Subtitulo")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Url")
+                        .HasMaxLength(255);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Banners");
+                });
+
             modelBuilder.Entity("BazarSapiens.Models.Bazar", b =>
                 {
                     b.Property<long>("Id")
@@ -63,7 +86,7 @@ namespace BazarSapiens.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<long>("BazarId");
+                    b.Property<long?>("BazarId");
 
                     b.Property<DateTime>("DataPublicacao");
 
@@ -94,7 +117,7 @@ namespace BazarSapiens.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("BazarId");
+                    b.Property<long?>("BazarId");
 
                     b.Property<string>("Descricao");
 
@@ -118,9 +141,9 @@ namespace BazarSapiens.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("BazarId");
+                    b.Property<long?>("BazarId");
 
-                    b.Property<long>("CategoriaId");
+                    b.Property<long?>("CategoriaId");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -161,29 +184,25 @@ namespace BazarSapiens.Migrations
                 {
                     b.HasOne("BazarSapiens.Models.Bazar", "Bazar")
                         .WithMany()
-                        .HasForeignKey("BazarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BazarId");
                 });
 
             modelBuilder.Entity("BazarSapiens.Models.Parceiro", b =>
                 {
                     b.HasOne("BazarSapiens.Models.Bazar", "Bazar")
                         .WithMany()
-                        .HasForeignKey("BazarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BazarId");
                 });
 
             modelBuilder.Entity("BazarSapiens.Models.Produto", b =>
                 {
                     b.HasOne("BazarSapiens.Models.Bazar", "Bazar")
                         .WithMany("Produtos")
-                        .HasForeignKey("BazarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BazarId");
 
                     b.HasOne("BazarSapiens.Models.Categoria", "Categoria")
                         .WithMany("Produtos")
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategoriaId");
                 });
 #pragma warning restore 612, 618
         }

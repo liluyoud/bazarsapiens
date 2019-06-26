@@ -9,14 +9,37 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BazarSapiens.Migrations
 {
     [DbContext(typeof(BazarContext))]
-    [Migration("20190619193910_Parceiro")]
-    partial class Parceiro
+    [Migration("20190626123555_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
+
+            modelBuilder.Entity("BazarSapiens.Models.Banner", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Conteúdo");
+
+                    b.Property<string>("Subtitulo")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Url")
+                        .HasMaxLength(255);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Banners");
+                });
 
             modelBuilder.Entity("BazarSapiens.Models.Bazar", b =>
                 {
@@ -34,6 +57,8 @@ namespace BazarSapiens.Migrations
                         .HasMaxLength(255);
 
                     b.Property<int>("Situacao");
+
+                    b.Property<int>("Visualizacoes");
 
                     b.HasKey("Id");
 
@@ -54,16 +79,57 @@ namespace BazarSapiens.Migrations
                     b.ToTable("Categorias");
                 });
 
+            modelBuilder.Entity("BazarSapiens.Models.Noticia", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Autor")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<long?>("BazarId");
+
+                    b.Property<DateTime>("DataPublicacao");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired();
+
+                    b.Property<string>("FotoPrincipal");
+
+                    b.Property<string>("Tags");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<int>("TotalFotos");
+
+                    b.Property<int>("Visualizacoes");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BazarId");
+
+                    b.ToTable("Noticias");
+                });
+
             modelBuilder.Entity("BazarSapiens.Models.Parceiro", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("BazarId");
+                    b.Property<long?>("BazarId");
+
+                    b.Property<string>("Descricao");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(255);
+
+                    b.Property<string>("Url");
+
+                    b.Property<int>("Visualizacoes");
 
                     b.HasKey("Id");
 
@@ -77,9 +143,9 @@ namespace BazarSapiens.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("BazarId");
+                    b.Property<long?>("BazarId");
 
-                    b.Property<long>("CategoriaId");
+                    b.Property<long?>("CategoriaId");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -105,6 +171,8 @@ namespace BazarSapiens.Migrations
 
                     b.Property<decimal>("ValorLance");
 
+                    b.Property<int>("Visualizacoes");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BazarId");
@@ -114,25 +182,29 @@ namespace BazarSapiens.Migrations
                     b.ToTable("Produtos");
                 });
 
+            modelBuilder.Entity("BazarSapiens.Models.Noticia", b =>
+                {
+                    b.HasOne("BazarSapiens.Models.Bazar", "Bazar")
+                        .WithMany()
+                        .HasForeignKey("BazarId");
+                });
+
             modelBuilder.Entity("BazarSapiens.Models.Parceiro", b =>
                 {
                     b.HasOne("BazarSapiens.Models.Bazar", "Bazar")
                         .WithMany()
-                        .HasForeignKey("BazarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BazarId");
                 });
 
             modelBuilder.Entity("BazarSapiens.Models.Produto", b =>
                 {
                     b.HasOne("BazarSapiens.Models.Bazar", "Bazar")
                         .WithMany("Produtos")
-                        .HasForeignKey("BazarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BazarId");
 
                     b.HasOne("BazarSapiens.Models.Categoria", "Categoria")
                         .WithMany("Produtos")
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategoriaId");
                 });
 #pragma warning restore 612, 618
         }

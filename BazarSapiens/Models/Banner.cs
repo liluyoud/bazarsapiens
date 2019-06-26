@@ -20,7 +20,6 @@ namespace BazarSapiens.Models
 
         public string Conteúdo { get; set; }
 
-        [Required]
         [StringLength(255)]
         public string Url { get; set; }
     }
