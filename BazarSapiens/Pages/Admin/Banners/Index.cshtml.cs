@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BazarSapiens.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using BazarSapiens.Models;
 
-namespace BazarSapiens.Pages
+namespace BazarSapiens.Pages.Admin.Banners
 {
-    public class BazaresModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly BazarSapiens.Models.BazarContext _context;
 
-        public BazaresModel(BazarSapiens.Models.BazarContext context)
+        public IndexModel(BazarSapiens.Models.BazarContext context)
         {
             _context = context;
         }
 
-        public IList<Bazar> Bazar { get; set; }
+        public IList<Banner> Banners { get;set; }
 
         public async Task OnGetAsync()
         {
-            Bazar = await _context.Bazares.ToListAsync();
+            Banners = await _context.Banners.ToListAsync();
         }
     }
 }

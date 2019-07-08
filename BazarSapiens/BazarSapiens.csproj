@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\Banners\" />
     <Folder Include="wwwroot\noticias\" />
     <Folder Include="wwwroot\parceiros\" />
     <Folder Include="wwwroot\produtos\" />

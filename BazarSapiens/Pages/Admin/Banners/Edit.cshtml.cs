@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BazarSapiens.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using System.IO;
 
-namespace BazarSapiens.Pages.Admin.Bazares
+namespace BazarSapiens.Pages.Admin.Banners
 {
     public class EditModel : PageModel
     {
@@ -25,12 +25,12 @@ namespace BazarSapiens.Pages.Admin.Bazares
         }
 
         [BindProperty]
-        public Bazar Bazar { get; set; }
+        public Banner Banner { get; set; }
 
         [BindProperty]
         public IFormFile Arquivo { get; set; }
 
-        public string Logotipo { get; set; }
+        public string Imagem { get; set; }
 
         public async Task<IActionResult> OnGetAsync(long? id)
         {
@@ -39,19 +39,20 @@ namespace BazarSapiens.Pages.Admin.Bazares
                 return NotFound();
             }
 
-            Bazar = await _context.Bazares.FirstOrDefaultAsync(m => m.Id == id);
-            if (Bazar == null)
+            Banner = await _context.Banners.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (Banner == null)
             {
                 return NotFound();
             }
 
-            var diretorio = Path.Combine(_ambiente.WebRootPath, "bazares");
+            var diretorio = Path.Combine(_ambiente.WebRootPath, "banners");
             var di = new DirectoryInfo(diretorio);
             foreach (var f in di.GetFiles())
             {
                 if (f.Name.StartsWith(id + "."))
                 {
-                    Logotipo = f.Name;
+                    Imagem = f.Name;
                     break;
                 }
             }
@@ -66,26 +67,29 @@ namespace BazarSapiens.Pages.Admin.Bazares
                 return Page();
             }
 
-            _context.Attach(Bazar).State = EntityState.Modified;
+            _context.Attach(Banner).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
-
                 if (Arquivo?.Length > 0)
                 {
                     var extensao = Path.GetExtension(Arquivo.FileName);
-                    var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "bazares", Bazar.Id + extensao);
+                    var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "banners", Banner.Id + extensao);
                     using (var stream = new FileStream(nomeArquivo, FileMode.Create))
                     {
                         Arquivo.CopyTo(stream);
                         stream.Close();
                     }
+
+                    Banner.Imagem = Banner.Id + extensao;
+
                 }
+
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BazarExists(Bazar.Id))
+                if (!BannerExists(Banner.Id))
                 {
                     return NotFound();
                 }
@@ -95,12 +99,12 @@ namespace BazarSapiens.Pages.Admin.Bazares
                 }
             }
 
-            return RedirectToPage("./Edit", new { Id = Bazar.Id });
+            return RedirectToPage("./Edit", new { Id = Banner.Id });
         }
 
-        private bool BazarExists(long id)
+        private bool BannerExists(long id)
         {
-            return _context.Bazares.Any(e => e.Id == id);
+            return _context.Banners.Any(e => e.Id == id);
         }
     }   
 }

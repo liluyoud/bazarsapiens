@@ -18,9 +18,14 @@ namespace BazarSapiens.Models
         [StringLength(255)]
         public string Subtitulo { get; set; }
 
-        public string Conteúdo { get; set; }
-
         [StringLength(255)]
         public string Url { get; set; }
+
+        [StringLength(10)]
+        public string Situacao { get; set; }
+
+        [StringLength(20)]
+        public string Imagem { get; set; }
+
     }
 }

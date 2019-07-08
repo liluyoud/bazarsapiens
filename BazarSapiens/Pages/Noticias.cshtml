@@ -1,4 +1,72 @@
-﻿@page
+﻿
+@page
 @model BazarSapiens.Pages.NoticiasModel
 @{
+    ViewData["Title"] = "Bazar Notícias";
 }
+<!-- -->
+<div class="container">
+    <div class="row">
+        <!--Card-News-->
+        <div class="col-lg-12">
+            @foreach (var item in Model.Noticias)
+            {
+            <!-- module - start-->
+            <article class="card wow fadeInLeft animation-delay-5 mb-4">
+                <div class="card-body overflow-hidden overflow-hidden">
+                    <!-- img + title + text-->
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <img src=@item.FotoPrincipal alt="" class="img-fluid mb-4" asp-i>
+                        </div>
+                        <div class="col-xl-6">
+                            <h3 class="no-mt">
+                                <a asp-page="./Noticia" asp-route-id=""title="Noticia">
+                                    @item.Titulo
+                                </a>
+                            </h3>
+                            <p class="mb-4">@item.Corpo</p>
+                        </div>
+                    </div>
+                    <!-- card-footer -->
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <img src="~/assets/img/me.jpg" alt="..." class="mw-25 rounded-circle mr-1"> by <a href="javascript:void(0)">@item.Autor</a> in <a href="javascript:void(0)" class="ms-tag ms-tag-info">@item.Tags</a>
+                            <span class="ml-1 d-none d-sm-inline">
+                                <i class="zmdi zmdi-time mr-05 color-info"></i>
+                                <span class="color-medium-dark">@item.DataPublicacao</span>
+                            </span>
+                        </div>
+                        <!--Read-More-->
+                        <div class="col-lg-4 text-right">
+                            <a asp-page="./Noticia" asp-route-id="@item.Id" class="btn btn-primary btn-raised btn-block animate-icon">Saiba mias<i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <!--module - end-->
+            }
+
+            <!--Foot-Nav-News-->
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-plain">
+                    <li class="page-item">
+                        <a class="page-link" href="javascriptÇ:void(0)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</div>

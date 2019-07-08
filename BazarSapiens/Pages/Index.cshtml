@@ -10,29 +10,33 @@
                 <div id="carousel-home-blog" class="carousel ms-carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#carousel-home-blog" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-home-blog" data-slide-to="1"></li>
+                        @{
+                            var classeIndicator = "active";
+                        }
+                        @for (int i = 0; i < Model.Banners.Count(); i++)
+                        {
+                            <li data-target="#carousel-home-blog" data-slide-to="@i" class="@classeIndicator"></li>
+                            classeIndicator = "";
+                        }
                     </ol>
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <a href="#">
-                                <img src="~/assets/img/banner1.jpg" class="d-block img-fluid" alt="...">
-                                <div class="carousel-caption">
-                                    <h2 class="color-primary">Um portal de solidariedade para você fazer diferença</h2>
-                                    <p class="d-none d-md-block">Nosso objetivo é conectar entidades que dão suporte ao próximo e pessoas dispostas a ajudar. Clique aqui para saber mais...</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="#">
-                                <img src="~/assets/img/banner2.jpg" class="d-block img-fluid" alt="...">
-                                <div class="carousel-caption">
-                                    <h2 class="color-primary">Juntos fazendo um mundo melhor</h2>
-                                    <p class="d-none d-md-block">São várias maneiras que você pode ajudar o próximo, seja doando algo, seja participando de nossos bazares. Clique aqui para participar...</p>
-                                </div>
-                            </a>
-                        </div>
+                        @{
+                            var classe = "active";
+                        }
+                        @foreach (var item in Model.Banners)
+                        {
+                            <div class="carousel-item @classe">
+                                <a href="@item.Url">
+                                    <img src="~/banners/@item.Imagem" class="d-block img-fluid" alt="...">
+                                    <div class="carousel-caption">
+                                        <h2 class="color-primary">@item.Titulo</h2>
+                                        <p class="d-none d-md-block">@item.Subtitulo</p>
+                                    </div>
+                                </a>
+                            </div>
+                            classe = "";
+                        }
                     </div>
                     <a href="#carousel-home-blog" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary left carousel-control-prev" role="button" data-slide="prev"><i class="zmdi zmdi-chevron-left"></i></a>
                     <a href="#carousel-home-blog" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary right carousel-control-next" role="button" data-slide="next"><i class="zmdi zmdi-chevron-right"></i></a>

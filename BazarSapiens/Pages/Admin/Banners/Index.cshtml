@@ -1,0 +1,36 @@
+﻿@page
+@model BazarSapiens.Pages.Admin.Banners.IndexModel
+
+@{
+    ViewData["Title"] = "Banners";
+}
+
+<h1>Banners</h1>
+
+<a asp-page="Create" class="btn btn-raised btn-info">Adicionar Banner</a>
+
+<div class="card">
+    <table class="table table-no-border">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Situação</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Banners)
+            {
+            <tr>
+                <td>@item.Titulo</td>
+                <td>@item.Situacao</td>
+                <td width="30">
+                    <a asp-page="./Edit" asp-route-id="@item.Id" title="Editar">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

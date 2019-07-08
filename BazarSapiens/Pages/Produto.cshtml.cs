@@ -31,6 +31,9 @@ namespace BazarSapiens.Pages
 
         public string Descricao { get; set; }
 
+        [BindProperty]
+        public decimal Lance { get; set; }
+
         public async Task<IActionResult> OnGetAsync(long? id)
         {
             if (id == null)
@@ -43,6 +46,8 @@ namespace BazarSapiens.Pages
             Descricao = Markdown.ToHtml(Produto.Descricao);
 
             Fotos = new List<string>();
+
+            Lance = Produto.ValorAtual + Produto.ValorLance;
 
             var diretorio = Path.Combine(_ambiente.WebRootPath, "produtos");
             var di = new DirectoryInfo(diretorio);

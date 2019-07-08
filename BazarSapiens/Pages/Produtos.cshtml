@@ -1,4 +1,106 @@
 ﻿@page
 @model BazarSapiens.Pages.ProdutosModel
+
 @{
+    ViewData["Title"] = "Produtos";
+}
+
+@*<h1>Produtos</h1>*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Filtros</h3>
+                </div>
+                <div class="card-body">
+                    <form class="form-horizontal" id="Filters">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <h4 class="mb-1 no-mt">Categorias</h4>
+                        <fieldset>
+
+                            <div class="form-group no-mt">
+                                @foreach (var item in Model.Categorias)
+                                {
+                                    <div class="checkbox">
+                                        <label class="control-label">
+                                            <input type="checkbox" value=".@item.Id"> @item.Descricao
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <h4 class="mb-1">Estado</h4>
+                            <div class="form-group no-mt">
+                                <div class="checkbox">
+                                    <label class="control-label">
+                                        <input type="checkbox" value=".Novo"> Novo
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label class="control-label">
+                                        <input type="checkbox" value=".Usado"> Usado
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <button class="btn btn-danger btn-block no-mb mt-2" id="Reset">
+                            <i class="zmdi zmdi-delete"></i> Limpar Filtros
+                        </button>
+                    </form>
+                    <form class="form-horizontal">
+                        <h4>Ordenar por</h4>
+                        <div class="form-group">
+                            <select id="SortSelect" class="form-control selectpicker" data-dropup-auto="false">
+                                <option value="random">Popularidade</option>
+                                <option value="price:asc">Preço Crescente</option>
+                                <option value="price:desc">Preço Decrescente</option>
+                                <option value="date:asc">Lançamento Crescente</option>
+                                <option value="date:desc">Lançamento Decrescente</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="row" id="Container">
+                @foreach (var item in Model.Produtos)
+                {
+                    <div class="col-xl-4 col-md-6 mix @item.Categoria.Id @item.Estado" data-price="@item.ValorAtual" data-date="20160705">
+                        <div class="card ms-feature">
+                            <div class="card-body overflow-hidden text-center">
+                                <a href="ecommerce-item.html">
+                                    <img src="~/produtos/@item.FotoPrincipal" alt="" class="img-fluid center-block">
+                                </a>
+                                <h4 class="text-normal text-center">@item.Nome</h4>
+                                <p>@item.Estado</p>
+                                <div class="mt-2">
+                                    <span class="mr-2">
+                                        <i class="zmdi zmdi-star color-warning"></i>
+                                        <i class="zmdi zmdi-star color-warning"></i>
+                                        <i class="zmdi zmdi-star color-warning"></i>
+                                        <i class="zmdi zmdi-star color-warning"></i>
+                                        <i class="zmdi zmdi-star color-warning"></i>
+                                    </span>
+                                    <span class="ms-tag ms-tag-success">@item.ValorAtual</span>
+                                </div>
+                                <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block btn-raised mt-2 no-mb">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i> Ver detalhes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- container -->
+
+@section Scripts
+{
+    <script src="/assets/js/ecommerce.js"></script>
 }

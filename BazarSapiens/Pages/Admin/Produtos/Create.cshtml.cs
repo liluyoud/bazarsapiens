@@ -49,6 +49,7 @@ namespace BazarSapiens.Pages.Admin.Produtos
             if (bazar != null)
                 Produto.BazarId = bazar.Id;
 
+            Produto.ValorAtual = Produto.ValorInicial;
             _context.Produtos.Add(Produto);
             await _context.SaveChangesAsync();
             int i = 0;

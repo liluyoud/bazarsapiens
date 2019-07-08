@@ -15,7 +15,7 @@ namespace BazarSapiens.Models
         public string Titulo { get; set; }
 
         [Required]
-        public string Descricao { get; set; }
+        public string Corpo { get; set; }
 
         [Required]
         public DateTime DataPublicacao { get; set; }
