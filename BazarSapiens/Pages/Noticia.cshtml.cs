@@ -30,7 +30,8 @@ namespace BazarSapiens.Pages
 
         public List<string> Fotos { get; set; }
 
-       
+        public string[] Tags { get; set; }
+
         public string Corpo { get; set; }
 
         public async Task<IActionResult> OnGetAsync(long? id)
@@ -42,7 +43,14 @@ namespace BazarSapiens.Pages
 
             Noticia = await _context.Noticias.FirstOrDefaultAsync(m => m.Id == id);
 
+            if (Noticia == null)
+            {
+                return NotFound();
+            }
+
             Corpo = Markdown.ToHtml(Noticia.Corpo);
+
+            Tags = Noticia.Tags?.Split(",");
 
             Fotos = new List<string>();
 
@@ -59,6 +67,9 @@ namespace BazarSapiens.Pages
                     Fotos.Add(f.Name);
                 }
             }
+
+            Noticia.Visualizacoes++;
+            await _context.SaveChangesAsync();
 
             return Page();
         }

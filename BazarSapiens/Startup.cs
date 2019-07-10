@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 
 namespace BazarSapiens
 {
@@ -29,6 +31,9 @@ namespace BazarSapiens
 
             services.AddDbContext<BazarContext>(options =>
                 options.UseSqlite(strCon));
+            services.AddDefaultIdentity<IdentityUser>()
+               .AddDefaultUI(UIFramework.Bootstrap4)
+               .AddEntityFrameworkStores<BazarContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -38,9 +43,16 @@ namespace BazarSapiens
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

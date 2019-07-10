@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace BazarSapiens.Models
 {
-    public class BazarContext: DbContext
+    public class BazarContext: IdentityDbContext
     {
         public DbSet<Bazar> Bazares { get; set; }
         public DbSet<Categoria> Categorias { get; set; }

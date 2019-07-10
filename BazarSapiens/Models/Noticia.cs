@@ -15,6 +15,9 @@ namespace BazarSapiens.Models
         public string Titulo { get; set; }
 
         [Required]
+        public string Resumo { get; set; }
+
+        [Required]
         public string Corpo { get; set; }
 
         [Required]

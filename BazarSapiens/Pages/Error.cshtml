@@ -1,0 +1,39 @@
+﻿@page
+@{
+    ViewData["Title"] = "Bazar - Erro";
+}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="card animated fadeInUp animation-delay-7 color-primary withripple">
+                    <div class="card-body-big color-dark">
+                        <div class="text-center">
+                            <h1 class="color-primary">Erro</h1>
+                            <h2>Erro na aplicação do Bazar</h2>
+                            <p class="lead lead-sm">
+                                Alguma coisa aconteceu de errado. Uma mensagem foi enviada aos administradores do Sistema e em breve tudo estará resolvido.
+                                <br>Enquanto isso, retorne a página inicial e realize outra tarefa.
+                            </p>
+                            <a asp-page="/Index" class="btn btn-primary btn-raised">
+                                <i class="zmdi zmdi-home"></i> Ir para a página inicial
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card animated fadeInUp animation-delay-9 color-primary withripple">
+                    <div class="card-body-big color-dark">
+                        <h2 class="color-primary">Pesquisa</h2>
+                        <p class="lead">Use esse mecanimso de pesquisa para navegar em nosso site ou encontrar o que você deseja.</p>
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="addon2">Pesquisar na página...</label>
+                            <input type="text" id="addon2" class="form-control">
+                        </div>
+                        <a href="index.html" class="btn btn-primary btn-raised btn-block">
+                            <i class="zmdi zmdi-search"></i> Pesquisar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

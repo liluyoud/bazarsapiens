@@ -1,4 +1,39 @@
 ﻿@page
 @model BazarSapiens.Pages.ParceirosModel
 @{
+    ViewData["Title"] = "Bazar - Parceiros";
 }
+
+<div class="material-background"></div>
+<div class="container">
+    <div class="text-center mb-6">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">Parceiros</h1>
+        <p class="lead lead-lg color-white text-center center-block mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">
+            Pessoas e organizações que fizeram <span class="colorStar">a diferença</span> na organização e apoio de nosso evento.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row masonry-container">
+                @foreach (var item in Model.Parceiros)
+                {
+                    <div class="col-lg-4 col-md-6 masonry-item wow fadeInUp animation-delay-2">
+                        <div class="card">
+                            <figure class="ms-thumbnail ms-thumbnail-horizontal">
+                                <img src="~/parceiros/@item.Logotipo" alt="@item.Logotipo" class="img-fluid">
+                                <figcaption class="ms-thumbnail-caption text-center">
+                                    <div class="ms-thumbnail-caption-content">
+                                        <h4 class="ms-thumbnail-caption-title mb-2">@item.Nome</h4>
+                                        <a href="@item.Url" target="_blank" class="btn-circle btn-circle-raised btn-circle-xs mr-1 btn-circle-white color-danger">
+                                            <i class="zmdi zmdi-link"></i>
+                                        </a>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

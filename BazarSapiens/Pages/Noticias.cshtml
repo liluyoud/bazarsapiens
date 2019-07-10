@@ -2,71 +2,134 @@
 @page
 @model BazarSapiens.Pages.NoticiasModel
 @{
-    ViewData["Title"] = "Bazar Notícias";
+    ViewData["Title"] = "Bazar - Notícias";
 }
-<!-- -->
+
+<div class="material-background"></div>
 <div class="container">
+    <div class="text-center mb-6">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">
+            Notícias
+        </h1>
+        <p class="lead lead-lg color-white text-center center-block mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">
+            Acompanhe <span class="colorStar">todas as ações</span> do Bazar da Solidariedade por esse canal, fruto de muito amor e dedicação.
+        </p>
+    </div>
     <div class="row">
-        <!--Card-News-->
-        <div class="col-lg-12">
+        <div class="col-lg-9">
             @foreach (var item in Model.Noticias)
             {
-            <!-- module - start-->
-            <article class="card wow fadeInLeft animation-delay-5 mb-4">
-                <div class="card-body overflow-hidden overflow-hidden">
-                    <!-- img + title + text-->
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <img src=@item.FotoPrincipal alt="" class="img-fluid mb-4" asp-i>
+                <article class="card wow fadeInLeft animation-delay-5 mb-4">
+                    <div class="card-body overflow-hidden overflow-hidden">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <img src="~/noticias/@item.FotoPrincipal" alt="@item.FotoPrincipal" class="img-fluid mb-4" asp-i>
+                            </div>
+                            <div class="col-xl-8">
+                                <h3 class="no-mt">
+                                    <a asp-page="./Noticia" asp-route-id="@item.Id" title="Noticia">
+                                        @item.Titulo
+                                    </a>
+                                </h3>
+                                <p class="mb-4">@item.Resumo</p>
+                            </div>
                         </div>
-                        <div class="col-xl-6">
-                            <h3 class="no-mt">
-                                <a asp-page="./Noticia" asp-route-id=""title="Noticia">
-                                    @item.Titulo
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <i class="zmdi zmdi-account"></i> Publicado por
+                                <span class="color-info">
+
+                                    @item.Autor
+                                </span><br />
+                                <i class="zmdi zmdi-time"></i> Em
+                                <span class="color-info">
+
+                                    @item.DataPublicacao.ToString("d 'de' MMMM 'de' yyyy")
+                                </span>
+                            </div>
+
+                            <div class="col-lg-4 text-right">
+                                <a asp-page="./Noticia" asp-route-id="@item.Id" class="btn btn-primary btn-raised btn-block animate-icon">
+                                    Saiba mias
+                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
                                 </a>
-                            </h3>
-                            <p class="mb-4">@item.Corpo</p>
+                            </div>
                         </div>
                     </div>
-                    <!-- card-footer -->
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <img src="~/assets/img/me.jpg" alt="..." class="mw-25 rounded-circle mr-1"> by <a href="javascript:void(0)">@item.Autor</a> in <a href="javascript:void(0)" class="ms-tag ms-tag-info">@item.Tags</a>
-                            <span class="ml-1 d-none d-sm-inline">
-                                <i class="zmdi zmdi-time mr-05 color-info"></i>
-                                <span class="color-medium-dark">@item.DataPublicacao</span>
-                            </span>
+                </article>
+            }
+        </div>
+
+        <div class="col-lg-3">
+            <div class="card card-primary animated fadeInUp animation-delay-7">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="zmdi zmdi-apps"></i> Notícias
+                    </h3>
+                </div>
+                <div class="card-tabs">
+                    <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-2" role="tablist">
+                        <li class="nav-item">
+                            <a href="#archives" title="Notícias por mês" aria-controls="archives" role="tab" data-toggle="tab" class="nav-link withoutripple active">
+                                <i class="no-mr zmdi zmdi-time"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#tags" title="Notícias por tags" aria-controls="tags" role="tab" data-toggle="tab" class="nav-link withoutripple">
+                                <i class="no-mr zmdi zmdi-tag-more"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active show" id="archives">
+                        <div class="list-group">
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
+                                <i class="zmdi zmdi-calendar"></i> Janeiro 2019
+                                <span class="ml-auto badge-pill">25</span>
+                            </a>
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
+                                <i class="zmdi zmdi-calendar"></i> Fevereiro 2019
+                                <span class="ml-auto badge-pill">14</span>
+                            </a>
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
+                                <i class="zmdi zmdi-calendar"></i> Março 2019
+                                <span class="ml-auto badge-pill">9</span>
+                            </a>
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
+                                <i class="zmdi zmdi-calendar"></i> Abril 2019
+                                <span class="ml-auto badge-pill">12</span>
+                            </a>
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
+                                <i class="zmdi zmdi-calendar"></i> Junho 2019
+                                <span class="ml-auto badge-pill">65</span>
+                            </a>
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
+                                <i class="zmdi zmdi-calendar"></i> Julho 2019
+                                <span class="ml-auto badge-pill">65</span>
+                            </a>
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
+                                <i class="zmdi zmdi-calendar"></i> Agosto 2019
+                                <span class="ml-auto badge-pill">65</span>
+                            </a>
                         </div>
-                        <!--Read-More-->
-                        <div class="col-lg-4 text-right">
-                            <a asp-page="./Noticia" asp-route-id="@item.Id" class="btn btn-primary btn-raised btn-block animate-icon">Saiba mias<i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="tags">
+                        <div class="card-body overflow-hidden overflow-hidden text-center">
+                            <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Pestalozzi</a>
+                            <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Visita</a>
+                            <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Parceiro</a>
+                            <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Reunião</a>
+                            <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Novidades</a>
+                            <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Atividade</a>
+                            <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Governo</a>
+                            <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Empresa</a>
+                            <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Pessoa</a>
                         </div>
                     </div>
                 </div>
-            </article>
-            <!--module - end-->
-            }
-
-            <!--Foot-Nav-News-->
-            <nav aria-label="Page navigation">
-                <ul class="pagination pagination-plain">
-                    <li class="page-item">
-                        <a class="page-link" href="javascriptÇ:void(0)" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            </div>
         </div>
     </div>
-</div>
 </div>

@@ -18,6 +18,22 @@
             </div>
         </div>
 
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Parceiro.Url" class="control-label">Endereço eletrônico do Parceiro</label>
+                <input asp-for="Parceiro.Url" class="form-control" />
+                <span asp-validation-for="Parceiro.Url" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label asp-for="Parceiro.Ordem" class="control-label">Ordem da Visualização</label>
+                <input asp-for="Parceiro.Ordem" class="form-control" />
+                <span asp-validation-for="Parceiro.Ordem" class="text-danger"></span>
+            </div>
+        </div>
+
         <div class="col-lg-12">
             <div class="form-group">
                 <label asp-for="Parceiro.Descricao" class="control-label">Informações sobre a parceria</label>

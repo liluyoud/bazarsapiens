@@ -27,8 +27,8 @@ namespace BazarSapiens.Pages
 
         public async Task OnGetAsync()
         {
-            Produtos = await _context.Produtos.ToListAsync();
-            Categorias = await _context.Categorias.ToListAsync();
+            Produtos = await _context.Produtos.OrderByDescending(c => c.Visualizacoes).ToListAsync();
+            Categorias = await _context.Categorias.OrderBy(c => c.Descricao).ToListAsync();
         }
 
     }

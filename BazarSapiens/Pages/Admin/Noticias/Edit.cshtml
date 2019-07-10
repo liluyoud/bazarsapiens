@@ -39,6 +39,22 @@
 
         <div class="col-lg-12">
             <div class="form-group">
+                <label asp-for="Noticia.Tags" class="control-label">Tags</label>
+                <input asp-for="Noticia.Tags" class="form-control" />
+                <span asp-validation-for="Noticia.Tags" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label asp-for="Noticia.Resumo" class="control-label">Resumo da Notícia</label>
+                <textarea asp-for="Noticia.Resumo" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Noticia.Resumo" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
                 <label asp-for="Noticia.Corpo" class="control-label">Descrição do Produto</label>
                 <textarea asp-for="Noticia.Corpo" class="form-control"></textarea>
             </div>

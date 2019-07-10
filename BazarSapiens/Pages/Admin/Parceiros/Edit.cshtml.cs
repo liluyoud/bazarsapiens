@@ -80,6 +80,8 @@ namespace BazarSapiens.Pages.Admin.Parceiros
                         Arquivo.CopyTo(stream);
                         stream.Close();
                     }
+
+                    Parceiro.Logotipo = Parceiro.Id + extensao;
                 }
 
                 await _context.SaveChangesAsync();

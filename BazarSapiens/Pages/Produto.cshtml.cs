@@ -63,6 +63,9 @@ namespace BazarSapiens.Pages
                 }
             }
 
+            Produto.Visualizacoes++;
+            await _context.SaveChangesAsync();
+
             return Page();
         }
     }

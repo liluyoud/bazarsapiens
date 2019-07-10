@@ -23,5 +23,10 @@ namespace BazarSapiens.Models
         public long? BazarId { get; set; }
 
         public int Visualizacoes { get; set; }
+
+        public int Ordem { get; set; }
+
+        [StringLength(20)]
+        public string Logotipo { get; set; }
     }
 }
