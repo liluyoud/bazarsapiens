@@ -5,6 +5,14 @@
     {
       "library": "simplemde@1.11.2",
       "destination": "wwwroot/assets/plugins/simplemde/"
+    },
+    {
+      "library": "limonte-sweetalert2@8.11.8",
+      "destination": "wwwroot/assets/plugins/sweetalert2/"
+    },
+    {
+      "library": "bootstrap-sweetalert@1.0.1",
+      "destination": "wwwroot/assets/plugins/bootstarp-sweetalert/"
     }
   ]
 }

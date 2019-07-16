@@ -20,7 +20,7 @@ namespace BazarSapiens.Controllers
             _context = context;
         }
 
-        public async Task<DadosLance> Get([FromQuery] long produtoId, decimal valorLance, string usuario)
+        public DadosLance Get([FromQuery] long produtoId, decimal valorLance, string usuario)
         {
             var retorno = new DadosLance();
             retorno.ProdutoId = produtoId;

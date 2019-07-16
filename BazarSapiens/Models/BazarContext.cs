@@ -5,6 +5,7 @@ namespace BazarSapiens.Models
 {
     public class BazarContext: IdentityDbContext
     {
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Bazar> Bazares { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Parceiro> Parceiros { get; set; }

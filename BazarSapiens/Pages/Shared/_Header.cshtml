@@ -17,7 +17,14 @@
                 </ul>
                 <a href="javascript:void(0)" class="btn-circle btn-circle-primary animated zoomInDown animation-delay-7"><i class="zmdi zmdi-share"></i></a>
             </div>
-            <a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account"></i></a>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account"></i></a>
+            }
+            else
+            {
+                <a asp-controller="Seguranca" asp-action="Logout" title="Fazer logout do usuário" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8"><i class="zmdi zmdi-sign-in"></i></a>
+            }
             <form class="search-form animated zoomInDown animation-delay-9">
                 <input id="search-box" type="text" class="search-input" placeholder="Faça sua pesquisa aqui..." name="q" />
                 <label for="search-box"><i class="zmdi zmdi-search"></i></label>

@@ -1,0 +1,27 @@
+﻿@page
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "Bazar - Email confirmado";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="card animated fadeInUp animation-delay-7 color-primary withripple">
+                <div class="card-body-big color-dark">
+                    <div class="text-center">
+                        <h1 class="color-primary">Sucesso</h1>
+                        <h2>Seu e-mail foi confirmado</h2>
+                        <p class="lead lead-sm">
+                            Agora você poderá receber informaçoes e notícias sobre o <strong>Bazar da Solidariedade</strong><br />
+                            Muito obrigado por fazer parte dessa grande iniciativa popupular
+                        </p>
+                        <a asp-page="/Index" class="btn btn-primary btn-raised">
+                            <i class="zmdi zmdi-home"></i> Ir para a página inicial
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

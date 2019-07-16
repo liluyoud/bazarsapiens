@@ -18,20 +18,20 @@
             <div class="modal-body">
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade active show" id="ms-login-tab">
-                        <form autocomplete="off">
+                        <form asp-controller="Seguranca" asp-action="Login" method="post" id="loginForm" autocomplete="off">
                             <fieldset>
                                 <div class="form-group label-floating">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                        <label class="control-label" for="ms-form-user">Usuário</label>
-                                        <input type="text" id="ms-form-user" class="form-control">
+                                        <label class="control-label" for="loginCpf">Cpf</label>
+                                        <input type="text" id="loginCpf" name="loginCpf" class="form-control cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required>
                                     </div>
                                 </div>
                                 <div class="form-group label-floating">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
-                                        <label class="control-label" for="ms-form-pass">Senha</label>
-                                        <input type="password" id="ms-form-pass" class="form-control">
+                                        <label class="control-label" for="loginPassword">Senha</label>
+                                        <input type="password" id="loginPassword" name="loginPassword" class="form-control" minlength=6 required>
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -39,7 +39,7 @@
                                         <div class="form-group no-mt">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox"> Lembrar login
+                                                    <input type="checkbox" id="loginRememberMe" name="loginRememberMe"> Lembrar login
                                                 </label>
                                             </div>
                                         </div>
@@ -50,41 +50,50 @@
                                 </div>
                             </fieldset>
                         </form>
-                        <div class="text-center">
-                            <h3>Entrar com</h3>
-                            <a href="javascript:void(0)" class="wave-effect-light btn btn-raised btn-facebook"><i class="zmdi zmdi-facebook"></i> Facebook</a>
-                            <a href="javascript:void(0)" class="wave-effect-light btn btn-raised btn-google"><i class="zmdi zmdi-google"></i> Google</a>
-                        </div>
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="ms-register-tab">
-                        <form>
+                        <form asp-controller="Seguranca" asp-action="Register" method="post" id="registerForm" autocomplete="off">
                             <fieldset>
                                 <div class="form-group label-floating">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                        <label class="control-label" for="ms-form-user-r">Usuário</label>
-                                        <input type="text" id="ms-form-user-r" class="form-control">
+                                        <label class="control-label" for="ms-form-user-r">Nome completo</label>
+                                        <input type="text" id="registerNome" name="registerNome" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="form-group label-floating">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-                                        <label class="control-label" for="ms-form-email-r">Email</label>
-                                        <input type="email" id="ms-form-email-r" class="form-control">
+                                        <label class="control-label" for="registerEmail">Email</label>
+                                        <input type="email" id="registerEmail" name="registerEmail" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-assignment-account"></i></span>
+                                        <label class="control-label" for="registerCpf">Cpf</label>
+                                        <input type="text" id="registerCpf" name="registerCpf" class="form-control cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-smartphone-iphone"></i></span>
+                                        <label class="control-label" for="registerCelular">Celular</label>
+                                        <input type="text" id="registerCelular" name="registerCelular" class="form-control celular" pattern="\([0-9]{2}\) 9[0-9]{4,4}-[0-9]{4,4}$" required>
                                     </div>
                                 </div>
                                 <div class="form-group label-floating">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
-                                        <label class="control-label" for="ms-form-pass-r">Senha</label>
-                                        <input type="password" id="ms-form-pass-r" class="form-control">
+                                        <label class="control-label" for="registerPassword">Senha</label>
+                                        <input type="password" id="registerPassword" name="registerPassword" class="form-control" minlength=6 required>
                                     </div>
                                 </div>
                                 <div class="form-group label-floating">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
-                                        <label class="control-label" for="ms-form-pass-rn">Confirme a senha</label>
-                                        <input type="password" id="ms-form-pass-rn" class="form-control">
+                                        <label class="control-label" for="registerConfirmation">Confirme a senha</label>
+                                        <input type="password" id="registerConfirmation" name="registerConfirmation" class="form-control" minlength=6 required>
                                     </div>
                                 </div>
                                 <button class="btn btn-raised btn-block btn-primary">Cadastrar agora</button>
@@ -92,20 +101,20 @@
                         </form>
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="ms-recovery-tab">
-                        <form>
+                        <form asp-controller="Seguranca" asp-action="ForgotPassword" method="post" id="forgotForm" autocomplete="off">
                             <fieldset>
                                 <div class="form-group label-floating">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                        <label class="control-label" for="ms-form-user-re">Usuário</label>
-                                        <input type="text" id="ms-form-user-re" class="form-control">
+                                        <label class="control-label" for="forgotCpf">Cpf</label>
+                                        <input type="text" id="forgotCpf" name="forgotCpf" class="form-control cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required>
                                     </div>
                                 </div>
                                 <div class="form-group label-floating">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-                                        <label class="control-label" for="ms-form-email-re">Email</label>
-                                        <input type="email" id="ms-form-email-re" class="form-control">
+                                        <label class="control-label" for="forgotEmail">Email</label>
+                                        <input type="email" id="forgotEmail" name="forgotEmail" class="form-control" required>
                                     </div>
                                 </div>
                                 <button class="btn btn-raised btn-block btn-primary">Enviar senha</button>

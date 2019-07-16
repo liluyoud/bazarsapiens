@@ -3,8 +3,15 @@
         <header class="ms-slidebar-header">
             <div class="ms-slidebar-title">
                 <div class="ms-slidebar-login">
-                    <a href="javascript:void(0)" class="withripple" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account"></i> Entrar</a>
-                    <a href="javascript:void(0)" class="withripple" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account-add"></i> Registrar</a>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a href="javascript:void(0)" class="withripple" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account"></i> Entrar</a>
+                        <a href="javascript:void(0)" class="withripple" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account-add"></i> Registrar</a>
+                    }
+                    else
+                    {
+                        <a href="javascript:void(0)" class="withripple" data-toggle="modal" data-target="#ms-account-modal">@User.Identity.Name</a>
+                    }
                 </div>
             </div>
         </header>
@@ -24,6 +31,12 @@
             <li>
                 <a class="link" asp-page="/Sobre"><i class="zmdi zmdi-library"></i> Sobre</a>
             </li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li>
+                    <a asp-controller="Seguranca" asp-action="Logout" class="link"><i class="zmdi zmdi-sign-in"></i> Sair</a>
+                </li>
+            }
         </ul>
         <div class="ms-slidebar-social ms-slidebar-block">
             <h4 class="ms-slidebar-block-title">Mídias Sociais</h4>

@@ -3,14 +3,16 @@ using System;
 using BazarSapiens.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BazarSapiens.Migrations
 {
     [DbContext(typeof(BazarContext))]
-    partial class BazarContextModelSnapshot : ModelSnapshot
+    [Migration("20190712160436_usuario")]
+    partial class usuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

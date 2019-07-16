@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using BazarSapiens.Services;
 
 namespace BazarSapiens
 {
@@ -29,11 +30,20 @@ namespace BazarSapiens
                 strCon = string.Format(strCon, Env.ContentRootPath);
             }
 
-            services.AddDbContext<BazarContext>(options =>
-                options.UseSqlite(strCon));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDbContext<BazarContext>(options => options.UseSqlite(strCon));
+
+            services.AddDefaultIdentity<Usuario>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 6;
+                })
                .AddDefaultUI(UIFramework.Bootstrap4)
                .AddEntityFrameworkStores<BazarContext>();
+
+            services.AddTransient<IMessageServices, MessageServices>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
