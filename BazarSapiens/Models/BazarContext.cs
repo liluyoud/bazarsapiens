@@ -12,6 +12,7 @@ namespace BazarSapiens.Models
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Noticia> Noticias { get; set; }
         public DbSet<Banner> Banners { get; set; }
+        public DbSet<Lance> Lances { get; set; }
 
         public BazarContext(DbContextOptions<BazarContext> options): base(options)
         {

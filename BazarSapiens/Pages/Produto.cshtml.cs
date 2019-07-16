@@ -30,6 +30,7 @@ namespace BazarSapiens.Pages
         public List<string> Fotos { get; set; }
 
         public string Descricao { get; set; }
+        public string PessoaUltimoLance { get; set; }
 
         [BindProperty]
         public decimal Lance { get; set; }
@@ -48,6 +49,9 @@ namespace BazarSapiens.Pages
             Fotos = new List<string>();
 
             Lance = Produto.ValorAtual + Produto.ValorLance;
+
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.UserName == Produto.UsuarioUltimoLance);
+            PessoaUltimoLance = usuario?.Nome;
 
             var diretorio = Path.Combine(_ambiente.WebRootPath, "produtos");
             var di = new DirectoryInfo(diretorio);

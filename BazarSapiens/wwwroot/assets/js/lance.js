@@ -11,7 +11,7 @@
 function clickEfetuar() {
     var produtoId = $('#Produto_Id').val();
     var valorLance = $('#valorLance').val();
-    var usuario = "Liluyoud";
+    var usuario = $('#userName').val();
     efetuarLance(produtoId, valorLance, usuario);
 }
 
@@ -23,10 +23,23 @@ function efetuarLance(produtoId, valorLance, usuario) {
         url: urlServico,
         dataType: 'json',
         success: function (data) {
-            alert("Seu lance foi efetuado, " + data.usuario);
+            if (data.id !== 0) {
+                $('#usuarioUltimoLance').html(data.usuario);
+                $('#valorUltimoLance').html(data.valorLance);
+                $('#valorLance').val(data.valorLance+1);
+                swal({
+                    title: "Lance Efetivado",
+                    text: data.usuario + ", seu lance foi registrado",
+                    type: "success"
+                });
+            }
         },
         error: function (ex) {
-            alert('Não foi possível registrar seu lance');
+            swal({
+                title: "Erro",
+                text: data.usuario + "Seu lance não foi registrado, tente novamente",
+                type: "error"
+            });
         }
     });
 }

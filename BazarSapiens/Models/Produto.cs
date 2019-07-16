@@ -38,6 +38,9 @@ namespace BazarSapiens.Models
         [StringLength(10)]
         public string Estado { get; set; }
 
+        [StringLength(14)]
+        public string UsuarioUltimoLance { get; set; }
+
         public Categoria Categoria { get; set; }
 
         public long? CategoriaId { get; set; }
