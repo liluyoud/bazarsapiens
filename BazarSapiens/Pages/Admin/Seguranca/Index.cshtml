@@ -1,0 +1,43 @@
+﻿@page
+@model BazarSapiens.Pages.Admin.Seguranca.IndexModel
+
+@{
+    ViewData["Title"] = "Bazar - Usuários";
+}
+
+<h1>Usuários (@Model.Usuarios.Count)</h1>
+
+<div class="card">
+    <table class="table table-no-border">
+        <thead>
+            <tr>
+                <th>Cpf</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Usuarios)
+            {
+            <tr>
+                <td>@item.Cpf</td>
+                <td>@item.Nome</td>
+                <td>@item.Email</td>
+                <td>@item.Telefone</td>
+                <td width="80" align="center">
+                    @if (item.Admin)
+                    {
+                        
+                        <span title="É Administrador"><i class="fa fa-id-badge"></i>&nbsp;</span>
+                    }
+                    <a asp-page="./Edit" asp-route-id="@item.Cpf" title="Editar">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

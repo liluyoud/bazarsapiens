@@ -1,0 +1,58 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Bazar - Login";
+}
+
+<div class="ms-hero-page-override ms-hero-img-city ms-hero-bg-dark-light">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">
+                Entrar no Bazar
+            </h1>
+            <p class="lead lead-lg color-white text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">
+                Informe seu Cpf e Senha para poder participar do 
+                <span class="color-warning">Bazar da Solidariedade</span>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-lg-6">
+            <div class="card card-hero card-primary animated fadeInUp animation-delay-7">
+                <div class="card-body">
+                    <form method="post" class="form-horizontal" autocomplete="off">
+                        <fieldset>
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group label-floating">
+                                <label asp-for="Input.Cpf" class="control-label">Cpf</label>
+                                <input asp-for="Input.Cpf" class="form-control cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required />
+                            </div>
+                            <div class="form-group label-floating">
+                                <label asp-for="Input.Password" class="control-label">Senha</label>
+                                <input asp-for="Input.Password" class="form-control" minlength=6 required />
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <div class="form-group no-mt">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" asp-for="Input.RememberMe"> Lembrar login
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-raised btn-primary pull-right">Login</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

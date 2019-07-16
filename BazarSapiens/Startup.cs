@@ -32,7 +32,7 @@ namespace BazarSapiens
 
             services.AddDbContext<BazarContext>(options => options.UseSqlite(strCon));
 
-            services.AddDefaultIdentity<Usuario>(options =>
+            services.AddIdentity<Usuario, IdentityRole>(options =>
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
@@ -40,12 +40,23 @@ namespace BazarSapiens
                     options.Password.RequireUppercase = false;
                     options.Password.RequiredLength = 6;
                 })
-               .AddDefaultUI(UIFramework.Bootstrap4)
-               .AddEntityFrameworkStores<BazarContext>();
+               .AddEntityFrameworkStores<BazarContext>()
+               .AddDefaultTokenProviders(); ;
 
             services.AddTransient<IMessageServices, MessageServices>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administradores"));
+            });
+
+            services.AddMvc()
+                .AddRazorPagesOptions(options =>
+                {
+                    options.Conventions.AuthorizePage("/Produto");
+                    options.Conventions.AuthorizeFolder("/Admin", "RequireAdministratorRole");
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

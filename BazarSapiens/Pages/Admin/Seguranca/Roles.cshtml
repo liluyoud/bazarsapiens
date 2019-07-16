@@ -1,0 +1,32 @@
+﻿@page
+@model BazarSapiens.Pages.Admin.Seguranca.RolesModel
+
+@{
+    ViewData["Title"] = "Bazar - Perfis";
+}
+
+<h1>Perfis (@Model.Roles.Count)</h1>
+
+<div class="card">
+    <table class="table table-no-border">
+        <thead>
+            <tr>
+                <th>Perfil</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Roles)
+            {
+            <tr>
+                <td>@item.Name</td>
+                <td width="30" align="center">
+                    <a href="#" title="Editar">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

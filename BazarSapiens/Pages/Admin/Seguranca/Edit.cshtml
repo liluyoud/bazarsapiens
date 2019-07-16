@@ -1,0 +1,59 @@
+﻿@page "{id}"
+@model BazarSapiens.Pages.Admin.Seguranca.EditModel
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<h1>Editar Usuário</h1>
+
+<form method="post" class="form-horizontal" autocomplete="off">
+    <fieldset>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Usuario.UserName" class="control-label">Cpf</label>
+            <input asp-for="Usuario.UserName" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Usuario.Nome" class="control-label">Nome Completo</label>
+            <input asp-for="Usuario.Nome" class="form-control" required />
+            <span asp-validation-for="Usuario.Nome" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Usuario.Email" class="control-label">E-Mail</label>
+            <input asp-for="Usuario.Email" class="form-control" required />
+            <span asp-validation-for="Usuario.Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Usuario.PhoneNumber" class="control-label">Celular</label>
+            <input asp-for="Usuario.PhoneNumber" class="form-control celular" pattern="\([0-9]{2}\) 9[0-9]{4,4}-[0-9]{4,4}$" required />
+            <span asp-validation-for="Usuario.PhoneNumber" class="text-danger"></span>
+        </div>
+
+        @if (Model.Administrador)
+        {
+            <div class="form-group text-info">
+                É administrador
+            </div>
+        }
+
+        <div class="form-group">
+            <input type="submit" value="Salvar Alterações" class="btn btn-raised btn-primary" /> &nbsp;&nbsp;
+            <a asp-controller="Seguranca" asp-action="ResetarSenha" asp-route-id="@Model.Usuario.UserName" class="btn btn-raised btn-warning">Resetar senha para 123456</a> &nbsp;&nbsp;
+            @if (Model.Administrador)
+            {
+                <a asp-controller="Seguranca" asp-action="TirarAdmin" asp-route-id="@Model.Usuario.UserName" class="btn btn-raised btn-warning">Tirar Admin</a>
+            }
+            else
+            {
+                <a asp-controller="Seguranca" asp-action="TornarAdmin" asp-route-id="@Model.Usuario.UserName" class="btn btn-raised btn-warning">Tornar Admin</a>
+            }
+            &nbsp; &nbsp;
+            <a asp-page="./Index">Retornar</a>
+        </div>
+    </fieldset>
+</form>

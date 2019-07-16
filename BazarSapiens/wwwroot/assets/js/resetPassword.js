@@ -1,6 +1,8 @@
 ﻿$(function () {
-    document.getElementById("Input_Password").onchange = validatePassword;
-    document.getElementById("Input_ConfirmPassword").onkeyup = validatePassword;
+    if (document.getElementById("Input_Password") !== null) {
+        document.getElementById("Input_Password").onchange = validatePassword;
+        document.getElementById("Input_ConfirmPassword").onkeyup = validatePassword;
+    }
 });
 
 function validatePassword() {

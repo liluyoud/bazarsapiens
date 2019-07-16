@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -116,6 +117,61 @@ namespace BazarSapiens.Controllers
             TempData["Swal"] = $"Sucesso;Foi enviado um email para você atualizar sua senha;success";
             return RedirectToPage("/Index");
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Administradores")]
+        public async Task<IActionResult> ResetarSenha(string id)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.UserName == id);
+            var swal = "Erro;Não foi possível resetar a senha;error";
+            if (usuario != null)
+            {
+                usuario.PasswordHash = "AQAAAAEAACcQAAAAEI+cy8kXmC/sQbBuZf/85cDEq96eYmA50IBpgpzd768HmJv7VDSEBDQmg13kox3YUA==";
+                _context.Attach(usuario).State = EntityState.Modified;
+                _context.SaveChanges();
+                swal = $"Sucesso;Senha atualizada com êxito;success";
+            }
+            TempData["Swal"] = swal;
+            return RedirectToPage("/Admin/Seguranca/Edit", new { Id = id });
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administradores")]
+        public async Task<IActionResult> TornarAdmin(string id)
+        {
+            var usuario = await _userManager.FindByNameAsync(id);
+            var swal = "Erro;Não foi possível atribuir o administrador ao usuário;error";
+            if (usuario != null)
+            {
+                var result = await _userManager.AddToRoleAsync(usuario, "Administradores");
+                if (!result.Succeeded)
+                {
+                    swal = "Sucesso;O usuário foi definido como Administrador;success";
+                }
+            }
+            TempData["Swal"] = swal;
+            return RedirectToPage("/Admin/Seguranca/Edit", new { Id = id });
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administradores")]
+        public async Task<IActionResult> TirarAdmin(string id)
+        {
+            var usuario = await _userManager.FindByNameAsync(id);
+            var swal = "Erro;Não foi possível remover o administrador ao usuário;error";
+            if (usuario != null)
+            {
+                var result = await _userManager.RemoveFromRoleAsync(usuario, "Administradores");
+                if (!result.Succeeded)
+                {
+                    swal = "Sucesso;O usuário foi excluído do grupo de Administradores;success";
+                }
+            }
+            TempData["Swal"] = swal;
+
+            return RedirectToPage("/Admin/Seguranca/Edit", new { Id = id });
+        }
+
     }
 
     public class RegisterModel
