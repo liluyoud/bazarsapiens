@@ -40,6 +40,9 @@ namespace BazarSapiens.Pages.Admin.Banners
             {
                 return Page();
             }
+            var bazar = _context.Bazares.OrderByDescending(b => b.Id).FirstOrDefault(b => b.Situacao != SituacaoBazar.Finalizado && b.Situacao != SituacaoBazar.Cancelado);
+            if (bazar != null)
+                Banner.BazarId = bazar.Id;
 
             _context.Banners.Add(Banner);
             await _context.SaveChangesAsync();

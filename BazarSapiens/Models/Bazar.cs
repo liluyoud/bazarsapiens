@@ -27,6 +27,15 @@ namespace BazarSapiens.Models
         public ICollection<Produto> Produtos { get; set; }
 
         public string Logotipo { get; set; }
+
+        [StringLength(100)]
+        public string Facebook { get; set; }
+
+        [StringLength(100)]
+        public string Twitter { get; set; }
+
+        [StringLength(100)]
+        public string Instagram { get; set; }
     }
 
     public enum SituacaoBazar

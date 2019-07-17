@@ -28,7 +28,8 @@ namespace BazarSapiens.Pages
 
         public async Task OnGetAsync()
         {
-            Noticias = await _context.Noticias.ToListAsync();
+            var bazar = _context.Bazares.OrderByDescending(b => b.Id).FirstOrDefault(b => b.Situacao != SituacaoBazar.Finalizado && b.Situacao != SituacaoBazar.Cancelado);
+            Noticias = await _context.Noticias.Where(n => n.BazarId == bazar.Id).OrderByDescending(n => n.DataPublicacao).ToListAsync();
         }
     }
 }

@@ -26,7 +26,8 @@ namespace BazarSapiens.Pages
 
         public async Task OnGetAsync()
         {
-            Parceiros = await _context.Parceiros.OrderBy(p => p.Ordem).ToListAsync();
+            var bazar = _context.Bazares.OrderByDescending(b => b.Id).FirstOrDefault(b => b.Situacao != SituacaoBazar.Finalizado && b.Situacao != SituacaoBazar.Cancelado);
+            Parceiros = await _context.Parceiros.Where(p => p.BazarId == bazar.Id).OrderBy(p => p.Ordem).ToListAsync();
         }
     }
 }

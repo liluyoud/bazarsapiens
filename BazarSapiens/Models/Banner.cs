@@ -29,5 +29,9 @@ namespace BazarSapiens.Models
 
         public int Ordem { get; set; }
 
+        public Bazar Bazar { get; set; }
+
+        public long? BazarId { get; set; }
+
     }
 }
