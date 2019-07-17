@@ -1,25 +1,25 @@
 ﻿@page
-@model BazarSapiens.Pages.Admin.Parceiros.IndexModel
+@model BazarSapiens.Pages.Admin.Colaboradores.IndexModel
 
 @{
-    ViewData["Title"] = "Parceiros";
+    ViewData["Title"] = "Bazar - Colaboradores";
 }
 
-<h1>Bazares</h1>
+<h1>Colaboradores</h1>
 
-<a asp-page="Create" class="btn btn-raised btn-info">Adicionar Parceiro</a>
+<a asp-page="Create" class="btn btn-raised btn-info">Adicionar Colaborador</a>
 
 <div class="card">
     <table class="table table-no-border">
         <thead>
             <tr>
                 <th>Ordem</th>
-                <th>Parceiro</th>
+                <th>Nome</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Parceiros)
+            @foreach (var item in Model.Colaboradores)
             {
             <tr>
                 <td>@item.Ordem</td>

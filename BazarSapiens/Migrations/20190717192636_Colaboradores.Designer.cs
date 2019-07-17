@@ -3,14 +3,16 @@ using System;
 using BazarSapiens.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BazarSapiens.Migrations
 {
     [DbContext(typeof(BazarContext))]
-    partial class BazarContextModelSnapshot : ModelSnapshot
+    [Migration("20190717192636_Colaboradores")]
+    partial class Colaboradores
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,8 +25,6 @@ namespace BazarSapiens.Migrations
 
                     b.Property<string>("Imagem")
                         .HasMaxLength(20);
-
-                    b.Property<int>("Ordem");
 
                     b.Property<string>("Situacao")
                         .HasMaxLength(10);
@@ -94,23 +94,14 @@ namespace BazarSapiens.Migrations
 
                     b.Property<string>("Descricao");
 
-                    b.Property<string>("Facebook")
-                        .HasMaxLength(100);
-
                     b.Property<string>("Foto")
                         .HasMaxLength(20);
-
-                    b.Property<string>("Instagram")
-                        .HasMaxLength(100);
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100);
 
                     b.Property<int>("Ordem");
-
-                    b.Property<string>("Twitter")
-                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 

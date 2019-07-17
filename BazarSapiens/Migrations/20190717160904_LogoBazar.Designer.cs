@@ -3,14 +3,16 @@ using System;
 using BazarSapiens.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BazarSapiens.Migrations
 {
     [DbContext(typeof(BazarContext))]
-    partial class BazarContextModelSnapshot : ModelSnapshot
+    [Migration("20190717160904_LogoBazar")]
+    partial class LogoBazar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,8 +25,6 @@ namespace BazarSapiens.Migrations
 
                     b.Property<string>("Imagem")
                         .HasMaxLength(20);
-
-                    b.Property<int>("Ordem");
 
                     b.Property<string>("Situacao")
                         .HasMaxLength(10);
@@ -83,40 +83,6 @@ namespace BazarSapiens.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categorias");
-                });
-
-            modelBuilder.Entity("BazarSapiens.Models.Colaborador", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long?>("BazarId");
-
-                    b.Property<string>("Descricao");
-
-                    b.Property<string>("Facebook")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Foto")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("Instagram")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<int>("Ordem");
-
-                    b.Property<string>("Twitter")
-                        .HasMaxLength(100);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BazarId");
-
-                    b.ToTable("Colaboradores");
                 });
 
             modelBuilder.Entity("BazarSapiens.Models.Lance", b =>
@@ -252,33 +218,6 @@ namespace BazarSapiens.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.ToTable("Produtos");
-                });
-
-            modelBuilder.Entity("BazarSapiens.Models.Testemunho", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Autor");
-
-                    b.Property<long?>("BazarId");
-
-                    b.Property<string>("Cargo");
-
-                    b.Property<string>("Foto")
-                        .HasMaxLength(20);
-
-                    b.Property<int>("Ordem");
-
-                    b.Property<string>("Texto")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BazarId");
-
-                    b.ToTable("Testemunhos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -458,13 +397,6 @@ namespace BazarSapiens.Migrations
                     b.HasDiscriminator().HasValue("Usuario");
                 });
 
-            modelBuilder.Entity("BazarSapiens.Models.Colaborador", b =>
-                {
-                    b.HasOne("BazarSapiens.Models.Bazar", "Bazar")
-                        .WithMany()
-                        .HasForeignKey("BazarId");
-                });
-
             modelBuilder.Entity("BazarSapiens.Models.Lance", b =>
                 {
                     b.HasOne("BazarSapiens.Models.Produto", "Produto")
@@ -495,13 +427,6 @@ namespace BazarSapiens.Migrations
                     b.HasOne("BazarSapiens.Models.Categoria", "Categoria")
                         .WithMany("Produtos")
                         .HasForeignKey("CategoriaId");
-                });
-
-            modelBuilder.Entity("BazarSapiens.Models.Testemunho", b =>
-                {
-                    b.HasOne("BazarSapiens.Models.Bazar", "Bazar")
-                        .WithMany()
-                        .HasForeignKey("BazarId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

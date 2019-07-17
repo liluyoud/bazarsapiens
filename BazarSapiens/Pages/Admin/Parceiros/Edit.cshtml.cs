@@ -30,8 +30,6 @@ namespace BazarSapiens.Pages.Admin.Parceiros
         [BindProperty]
         public IFormFile Arquivo { get; set; }
 
-        public string Logotipo { get; set; }
-
         public async Task<IActionResult> OnGetAsync(long? id)
         {
             if (id == null)
@@ -43,17 +41,6 @@ namespace BazarSapiens.Pages.Admin.Parceiros
             if (Parceiro == null)
             {
                 return NotFound();
-            }
-
-            var diretorio = Path.Combine(_ambiente.WebRootPath, "parceiros");
-            var di = new DirectoryInfo(diretorio);
-            foreach (var f in di.GetFiles())
-            {
-                if (f.Name.StartsWith(id + "."))
-                {
-                    Logotipo = f.Name;
-                    break;
-                }
             }
 
             return Page();

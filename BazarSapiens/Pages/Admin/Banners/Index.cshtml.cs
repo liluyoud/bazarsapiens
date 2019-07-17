@@ -22,7 +22,7 @@ namespace BazarSapiens.Pages.Admin.Banners
 
         public async Task OnGetAsync()
         {
-            Banners = await _context.Banners.ToListAsync();
+            Banners = await _context.Banners.OrderBy(b => b.Ordem).ToListAsync();
         }
     }
 }

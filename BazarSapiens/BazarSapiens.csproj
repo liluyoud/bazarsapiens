@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\noticias\" />
+    <Folder Include="wwwroot\colaboradores\" />
     <Folder Include="wwwroot\parceiros\" />
     <Folder Include="wwwroot\produtos\" />
   </ItemGroup>

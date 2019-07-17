@@ -13,6 +13,7 @@
     <table class="table table-no-border">
         <thead>
             <tr>
+                <th>Ordem</th>
                 <th>Título</th>
                 <th>Situação</th>
                 <th></th>
@@ -22,6 +23,7 @@
             @foreach (var item in Model.Banners)
             {
             <tr>
+                <td>@item.Ordem</td>
                 <td>@item.Titulo</td>
                 <td>@item.Situacao</td>
                 <td width="30">

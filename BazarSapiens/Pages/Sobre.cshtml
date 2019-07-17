@@ -1,16 +1,108 @@
 ﻿@page
+@model BazarSapiens.Pages.SobreModel
 @{
     ViewData["Title"] = "Bazar - Sobre";
 }
 
-<div class="material-background"></div>
+<div class="ms-hero-page-override ms-hero-img-city ms-hero-bg-primary">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">
+                Bazar da Solidariedade
+            </h1>
+            <p class="lead lead-lg color-white text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">
+                <span class="color-warning">O AMOR É CONTAGIANTE!</span> Nosso objetivo é conectar entidades que dão suporte ao próximo e pessoas dispostas a ajudar.
+            </p>
+        </div>
+    </div>
+</div>
+
 <div class="container">
-    <div class="text-center mb-6">
-        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">
-            Sobre o Bazar
-        </h1>
-        <p class="lead lead-lg color-white text-center center-block mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">
-            <span class="colorStar">Em breve</span> mais informações sobre o projeto
-        </p>
+    <div class="card card-hero animated slideInUp animation-delay-8 mb-6">
+        <div class="card-body">
+            <h2 class="color-primary">Sobre o nosso Bazar</h2>
+            <div class="row">
+                <div class="col-lg-8 text-justify">
+                    @Html.Raw(Model.BazarDescricao)
+                </div>
+                <div class="col-lg-4">
+                    <img src="~/bazares/@Model.Bazar.Logotipo" class="img-fluid" />
+                </div>
+            </div>
+
+            <hr class="dotted">
+
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-danger card-flat">
+                        <div class="card-body overflow-hidden text-center">
+                            <i class="fa fa-heart color-danger font-big"></i>
+                            <h4 class="color-danger">O Amor é Contagiante</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-warning card-flat">
+                        <div class="card-body overflow-hidden text-center">
+                            <i class="fa fa-chain color-warning font-big"></i>
+                            <h4 class="color-warning">Nossa Corrente do Bem</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-info card-flat">
+                        <div class="card-body overflow-hidden text-center">
+                            <i class="fa fa-handshake-o color-info font-big"></i>
+                            <h4 class="color-info">Unidos somos mais fortes</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-success card-flat">
+                        <div class="card-body overflow-hidden text-center">
+                            <i class="fa fa-bullhorn color-success font-big"></i>
+                            <h4 class="color-success">Semeie essa mensagem</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="text-center color-primary no-mt wow fadeInUp">Nosso Time</h2>
+    <p class="lead text-center wow fadeInUp animation-delay-4">Algumas das pessoas cujo sonho se transformou em realidade.</p>
+    <div class="row d-flex justify-content-center">
+        @foreach (var item in Model.Colaboradores)
+        {
+            <div class="col-lg-3 col-md-4">
+                <div class="card card-primary wow zoomInUp animation-delay-5">
+                    <figure class="ms-thumbnail ms-thumbnail-horizontal">
+                        <img src="~/colaboradores/@item.Foto" alt="@item.Foto" class="img-fluid">
+                        <figcaption class="ms-thumbnail-caption text-center">
+                            <div class="ms-thumbnail-caption-content">
+                                <h4 class="ms-thumbnail-caption-title mb-2">@item.Nome</h4>
+                                <div class="text-center">
+                                    <a href="https://web.facebook.com/@item.Facebook" target="_blank" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook">
+                                        <i class="zmdi zmdi-facebook"></i>
+                                    </a>
+                                    <a href="https://twitter.com/@item.Twitter" target="_blank" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-twitter">
+                                        <i class="zmdi zmdi-twitter"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/@item.Instagram" target="_blank" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram">
+                                        <i class="zmdi zmdi-instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </figcaption>
+                    </figure>
+                    <div class="card-body">
+                        <h4 class="color-info text-center no-mt">@item.Nome</h4>
+                        <p class="text-justify">@item.Descricao</p>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>

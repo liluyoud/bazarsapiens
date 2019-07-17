@@ -30,8 +30,6 @@ namespace BazarSapiens.Pages.Admin.Banners
         [BindProperty]
         public IFormFile Arquivo { get; set; }
 
-        public string Imagem { get; set; }
-
         public async Task<IActionResult> OnGetAsync(long? id)
         {
             if (id == null)
@@ -45,18 +43,6 @@ namespace BazarSapiens.Pages.Admin.Banners
             {
                 return NotFound();
             }
-
-            var diretorio = Path.Combine(_ambiente.WebRootPath, "banners");
-            var di = new DirectoryInfo(diretorio);
-            foreach (var f in di.GetFiles())
-            {
-                if (f.Name.StartsWith(id + "."))
-                {
-                    Imagem = f.Name;
-                    break;
-                }
-            }
-
             return Page();
         }
 
@@ -66,8 +52,6 @@ namespace BazarSapiens.Pages.Admin.Banners
             {
                 return Page();
             }
-
-            _context.Attach(Banner).State = EntityState.Modified;
 
             try
             {
@@ -85,6 +69,7 @@ namespace BazarSapiens.Pages.Admin.Banners
 
                 }
 
+                _context.Attach(Banner).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

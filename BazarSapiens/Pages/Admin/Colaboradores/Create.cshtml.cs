@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 
-namespace BazarSapiens.Pages.Admin.Bazares
+namespace BazarSapiens.Pages.Admin.Colaboradores
 {
     public class CreateModel : PageModel
     {
@@ -30,7 +30,7 @@ namespace BazarSapiens.Pages.Admin.Bazares
         }
 
         [BindProperty]
-        public Bazar Bazar { get; set; }
+        public Colaborador Colaborador { get; set; }
 
 
         [BindProperty]
@@ -43,20 +43,25 @@ namespace BazarSapiens.Pages.Admin.Bazares
                 return Page();
             }
 
-            _context.Bazares.Add(Bazar);
+            // atualizar para quando tiver mais de 1 bazar acontecendo ao mesmo tempo
+            var bazar = _context.Bazares.OrderByDescending(b => b.Id).FirstOrDefault(b => b.Situacao != SituacaoBazar.Finalizado && b.Situacao != SituacaoBazar.Cancelado);
+            if (bazar != null)
+                Colaborador.BazarId = bazar.Id;
+
+            _context.Colaboradores.Add(Colaborador);
             await _context.SaveChangesAsync();
             if (Arquivo.Length > 0)
             {
                 var extensao = Path.GetExtension(Arquivo.FileName); 
-                var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "bazares", Bazar.Id + extensao);
+                var nomeArquivo = Path.Combine(_ambiente.WebRootPath, "colaboradores", Colaborador.Id + extensao);
                 using (var stream = new FileStream(nomeArquivo, FileMode.Create))
                 {
                     Arquivo.CopyTo(stream);
                     stream.Close();
                 }
 
-                Bazar.Logotipo = Bazar.Id + extensao;
-                _context.Attach(Bazar).State = EntityState.Modified;
+                Colaborador.Foto = Colaborador.Id + extensao;
+                _context.Attach(Colaborador).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
 

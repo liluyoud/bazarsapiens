@@ -1,0 +1,86 @@
+﻿@page "{id}"
+@model BazarSapiens.Pages.Admin.Colaboradores.EditModel
+
+@{
+    ViewData["Title"] = "Bazar - Colaboradores";
+}
+
+<h1>Editar Colaborador</h1>
+
+<form method="post" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <input asp-for="Colaborador.Id" hidden />
+                <input asp-for="Colaborador.BazarId" hidden />
+                <input asp-for="Colaborador.Foto" hidden />
+
+                <label asp-for="Colaborador.Ordem" class="control-label">Ordem de Visualização</label>
+                <input asp-for="Colaborador.Ordem" class="form-control" />
+                <span asp-validation-for="Colaborador.Ordem" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="form-group">
+                <label asp-for="Colaborador.Nome" class="control-label">Nome do Colaborador</label>
+                <input asp-for="Colaborador.Nome" class="form-control" />
+                <span asp-validation-for="Colaborador.Nome" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label asp-for="Colaborador.Descricao" class="control-label">Informações sobre a colaboração</label>
+                <textarea asp-for="Colaborador.Descricao" class="form-control"></textarea>
+                <span asp-validation-for="Colaborador.Descricao" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label asp-for="Colaborador.Facebook" class="control-label">Facebook</label>
+                <input asp-for="Colaborador.Facebook" class="form-control" />
+                <span asp-validation-for="Colaborador.Facebook" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label asp-for="Colaborador.Twitter" class="control-label">Twitter</label>
+                <input asp-for="Colaborador.Twitter" class="form-control" />
+                <span asp-validation-for="Colaborador.Twitter" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label asp-for="Colaborador.Instagram" class="control-label">Instagram</label>
+                <input asp-for="Colaborador.Instagram" class="form-control" />
+                <span asp-validation-for="Colaborador.Instagram" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label class="control-label">Foto do Colaborador</label><br />
+                <img src="~/colaboradores/@Model.Colaborador.Foto" alt="@Model.Colaborador.Foto" class="img-fluid">
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label asp-for="Arquivo" class="control-label">Selecione uma nova foto</label>
+                <input type="text" readonly="" class="form-control" placeholder="Caso queira alterar, selecione uma nova foto...">
+                <input type="file" asp-for="Arquivo">
+                <small class="text-danger">Recomendamos imagens com a resolução de 384 x 256px</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Salvar as alterações" class="btn btn-raised btn-primary" /> &nbsp;&nbsp;
+            <a asp-page="Index">Voltar a lista de colaboradores</a>
+        </div>
+    </div>
+</form>

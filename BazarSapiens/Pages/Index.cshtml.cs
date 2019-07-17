@@ -20,12 +20,11 @@ namespace BazarSapiens.Pages
             _ambiente = ambiente;
         }
 
-
         public IEnumerable<Banner> Banners { get; set; }
 
         public void OnGet()
         {
-            Banners = _context.Banners.Where(b => b.Situacao == "Ativo");
+            Banners = _context.Banners.OrderBy(b => b.Ordem).Where(b => b.Situacao == "Ativo");
         }
     }
 }

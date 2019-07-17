@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BazarSapiens.Models;
 
-namespace BazarSapiens.Pages.Admin.Parceiros
+namespace BazarSapiens.Pages.Admin.Colaboradores
 {
     public class IndexModel : PageModel
     {
@@ -18,12 +18,12 @@ namespace BazarSapiens.Pages.Admin.Parceiros
             _context = context;
         }
 
-        public IList<Parceiro> Parceiros { get;set; }
+        public IList<Colaborador> Colaboradores { get;set; }
 
         public async Task OnGetAsync()
         {
             var bazar = _context.Bazares.OrderByDescending(b => b.Id).FirstOrDefault(b => b.Situacao != SituacaoBazar.Finalizado && b.Situacao != SituacaoBazar.Cancelado);
-            Parceiros = await _context.Parceiros.Where(p => p.BazarId == bazar.Id).OrderBy(p => p.Ordem).ToListAsync();
+            Colaboradores = await _context.Colaboradores.Where(c => c.BazarId == bazar.Id).OrderBy(c => c.Ordem).ToListAsync();
         }
     }
 }

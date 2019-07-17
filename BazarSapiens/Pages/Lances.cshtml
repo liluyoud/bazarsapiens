@@ -6,15 +6,8 @@
 }
 
     <div class="container container-full">
-        <div class="row">
-            <div class="col-md-9">
-                <h2 class="text-info">Lances (@Model.Lances.Count)</h2>
-            </div>
-            <div class="col-md-3 text-right">
-                <a asp-page="/Produto" asp-route-id="@Model.ProdutoId" class="btn btn-info btn-block btn-raised">Retornar</a>
-            </div>
-        </div>
-        
+        <h2 class="text-info">Lances (@Model.Lances.Count)</h2>
+
         <div class="ms-paper">
             <div class="ms-paper-content">
                 <session class="ms-component-section">
@@ -31,16 +24,20 @@
                             <tbody>
                                 @foreach (var item in Model.Lances)
                                 {
-                                    <tr>
-                                        <td>@item.Nome</td>
-                                        <td align="center">@item.Valor</td>
-                                        <td align="center">@item.DataHora.ToString("HH:mm:ss 'de' dd/MM/yyyy")</td>
-                                    </tr>
+                                <tr>
+                                    <td>@item.Nome</td>
+                                    <td align="center">@item.Valor</td>
+                                    <td align="center">@item.DataHora.ToString("HH:mm:ss 'de' dd/MM/yyyy")</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
                     </div>
                 </session>
             </div>
+        </div>
+
+        <div class="text-center">
+            <a asp-page="/Produto" asp-route-id="@Model.ProdutoId" class="btn btn-info btn-raised">Retornar ao produto</a>
         </div>
     </div>

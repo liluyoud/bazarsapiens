@@ -25,6 +25,8 @@ namespace BazarSapiens.Models
         public int Visualizacoes { get; set; }
 
         public ICollection<Produto> Produtos { get; set; }
+
+        public string Logotipo { get; set; }
     }
 
     public enum SituacaoBazar

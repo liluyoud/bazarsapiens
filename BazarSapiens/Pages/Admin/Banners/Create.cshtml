@@ -27,14 +27,21 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Banner.Ordem" class="control-label">Ordem de Visualização</label>
+                <input asp-for="Banner.Ordem" class="form-control" />
+                <span asp-validation-for="Banner.Ordem" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="Banner.Url" class="control-label">Url do Banner</label>
                 <input asp-for="Banner.Url" class="form-control" />
                 <span asp-validation-for="Banner.Url" class="text-danger"></span>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="Banner.Situacao" class="control-label">Situação do Banner</label>
                 <select asp-for="Banner.Situacao" class="form-control" data-dropup-auto="false">

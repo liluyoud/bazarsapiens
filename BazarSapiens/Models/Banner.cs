@@ -27,5 +27,7 @@ namespace BazarSapiens.Models
         [StringLength(20)]
         public string Imagem { get; set; }
 
+        public int Ordem { get; set; }
+
     }
 }
