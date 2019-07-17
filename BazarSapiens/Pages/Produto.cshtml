@@ -93,7 +93,13 @@
                             </span>
                         </div>
                     </div>
-                      
+
+                    <div class="form-group text-center">
+                        <a asp-page="/Produtos" class="btn-circle btn-circle-raised btn-circle-warning" title="Retornar ao Leilão"><i class="zmdi zmdi-mail-reply-all"></i></a>
+                        &nbsp;&nbsp;&nbsp;
+                        <a asp-page="/Lances" asp-route-id="@Model.Produto.Id" class="btn-circle btn-circle-raised btn-circle-warning" title="Mostrar todos os lances"><i class="zmdi zmdi-seat"></i></a>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -11,9 +11,9 @@ namespace BazarSapiens.Pages.Admin.Produtos
 {
     public class IndexModel : PageModel
     {
-        private readonly BazarSapiens.Models.BazarContext _context;
+        private readonly BazarContext _context;
 
-        public IndexModel(BazarSapiens.Models.BazarContext context)
+        public IndexModel(BazarContext context)
         {
             _context = context;
         }

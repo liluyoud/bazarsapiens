@@ -1,0 +1,46 @@
+﻿@page "{id}"
+@model BazarSapiens.Pages.LancesModel
+
+@{
+    ViewData["Title"] = "Bazar - Lances";
+}
+
+    <div class="container container-full">
+        <div class="row">
+            <div class="col-md-9">
+                <h2 class="text-info">Lances (@Model.Lances.Count)</h2>
+            </div>
+            <div class="col-md-3 text-right">
+                <a asp-page="/Produto" asp-route-id="@Model.ProdutoId" class="btn btn-info btn-block btn-raised">Retornar</a>
+            </div>
+        </div>
+        
+        <div class="ms-paper">
+            <div class="ms-paper-content">
+                <session class="ms-component-section">
+                    <div class="card">
+                        <table class="table table-no-border">
+                            <thead>
+                                <tr>
+                                    <th>Pessoa que deu o lance</th>
+                                    <th class="text-center">Valor do Lance</th>
+                                    <th class="text-center">Data e Hora do Lance</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Lances)
+                                {
+                                    <tr>
+                                        <td>@item.Nome</td>
+                                        <td align="center">@item.Valor</td>
+                                        <td align="center">@item.DataHora.ToString("HH:mm:ss 'de' dd/MM/yyyy")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </session>
+            </div>
+        </div>
+    </div>
