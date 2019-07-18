@@ -13,46 +13,71 @@
             <p class="lead lead-lg color-white text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">
                 Consulte quaisquer informações sobre o nosso <span class="color-warning">Bazar da Solidariedade</span>
             </p>
+            <div class="row d-flex justify-content-center mt-2">
+                <div class="col-lg-6">
+                    <form method="post">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input asp-for="Pesquisa" name="pesquisa" class="form-control text-white text-center" placeholder="Pesquisar por...">
+                                <span class="input-group-btn" title="Efetuar pesquisa">
+                                    <button class="btn btn-info btn-raised" type="submit">&nbsp;&nbsp;<i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="card card-hero animated slideInUp animation-delay-6">
-        <div class="card-body">
-            <form class="app-search" action="/Search" method="post">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" id="pesquisa" name="pesquisa" class="form-control" placeholder="Pesquisar por...">
-                        <span class="input-group-btn" title="Efetuar pesquisa">
-                            <button class="btn btn-info btn-raised" type="button">&nbsp;&nbsp;<i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
-                </div>
-            </form>
+    @if (Model.Objetos.Count == 0)
+    {
+        <div class="card animated slideInUp animation-delay-7 mt-2">
+            <h3 class="text-center">Nenhum item encontrado</h3>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="card card-hero animated slideInUp animation-delay-7">
+            <div class="list-group">
+                @foreach (var item in Model.Objetos)
+                {
+                    switch (item.Tipo)
+                    {
+                        case SearchObject.Produto:
+                            {
+                                <a asp-page="/Produto" asp-route-id="@item.Id" class="list-group-item list-group-action withripple">
+                                    <img src="~/produtos/@item.Imagem" class="img-fluid mr-3" width="120" />
+                                    <div>
+                                        <h4 class="no-mb">@item.Texto</h4>
+                                        @{ 
+                                            var info = item.Subtexto.Split(";");
+                                            var categoria = info[0];
+                                            var estado = info[1];
+                                            var valorInicial = info[2];
+                                            var valorAtual = info[3];
+                                            var lances = info[4];
+                                            var visualizacoes = info[5];
+                                            var fotos = info[6];
+                                        }
+                                        <span class="mr-2">
+                                            <span title="Total de Visualizações" class="text-black-50"><i class="zmdi zmdi-eye"></i> @visualizacoes visualizações</span>
+                                            &nbsp;&nbsp;
+                                            <span title="Total de Lances" class="text-black-50"><i class="zmdi zmdi-flash"></i> @lances lances</span>
+                                        </span>
+                                        <span class="ms-tag ms-tag-success" title="Valor atual">R$ @string.Format("{0},00", valorAtual)</span>
+                                    </div>
+                                    <span class="ml-auto badge badge-default">Produto</span>
+                                </a>
+                                break;
+                            }
+                    }
+                }
+            </div>
+        </div>
+    }
 
-    <div class="card animated slideInUp animation-delay-7">
-        <div class="card-body">
-            <table class="table table-no-border">
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th class="text-center">Valor do Último Lance</th>
-                        <th class="text-center">Data e Hora do Último Lance</th>
-                        <th class="text-center">Situação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>TESTE</td>
-                        <td align="center">teste</td>
-                        <td align="center">teste</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
 

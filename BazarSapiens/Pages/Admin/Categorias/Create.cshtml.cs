@@ -33,6 +33,10 @@ namespace BazarSapiens.Pages.Admin.Categorias
                 return Page();
             }
 
+            var bazar = _context.Bazares.OrderByDescending(b => b.Id).FirstOrDefault(b => b.Situacao != SituacaoBazar.Finalizado && b.Situacao != SituacaoBazar.Cancelado);
+            if (bazar != null)
+                Categoria.BazarId = bazar.Id;
+
             _context.Categorias.Add(Categoria);
             await _context.SaveChangesAsync();
 

@@ -27,8 +27,10 @@ namespace BazarSapiens.Pages
 
         public async Task OnGetAsync()
         {
-            Produtos = await _context.Produtos.OrderByDescending(c => c.Visualizacoes).ToListAsync();
-            Categorias = await _context.Categorias.OrderBy(c => c.Descricao).ToListAsync();
+            var bazar = _context.Bazares.OrderByDescending(b => b.Id).FirstOrDefault(b => b.Situacao != SituacaoBazar.Finalizado && b.Situacao != SituacaoBazar.Cancelado);
+
+            Produtos = await _context.Produtos.Where(p => p.BazarId == bazar.Id).OrderByDescending(c => c.Visualizacoes).ToListAsync();
+            Categorias = await _context.Categorias.Where(c => c.BazarId == bazar.Id).OrderBy(c => c.Descricao).ToListAsync();
         }
 
     }

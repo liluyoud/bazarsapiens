@@ -11,6 +11,10 @@ namespace BazarSapiens.Models
         [StringLength(50)]
         public string Descricao { get; set; }
 
+        public Bazar Bazar { get; set; }
+
+        public long? BazarId { get; set; }
+
         public ICollection<Produto> Produtos { get; set; }
     }
 }
