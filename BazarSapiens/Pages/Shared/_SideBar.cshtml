@@ -31,6 +31,12 @@
             <li>
                 <a class="link" asp-page="/Sobre"><i class="zmdi zmdi-library"></i> Sobre</a>
             </li>
+            @if (User.IsInRole("Administradores"))
+            {
+                <li>
+                    <a class="link" asp-page="/Admin/Index"><i class="zmdi zmdi-lock"></i> Admin</a>
+                </li>
+            }
             @if (User.Identity.IsAuthenticated)
             {
                 <li>

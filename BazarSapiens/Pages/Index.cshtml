@@ -43,64 +43,135 @@
             </div>
         </div>
     </div>
-    <hr class="dotted">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="row masonry-container">
-                <div class="col-md-6 masonry-item wow fadeInUp animation-delay-2">
-                    <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                        <figure class="ms-thumbnail ms-thumbnail-left">
-                            <img src="~/bazares/1.jpg" alt="" class="img-fluid">
-                            <figcaption class="ms-thumbnail-caption text-center">
-                                <div class="ms-thumbnail-caption-content">
-                                    <h3 class="ms-thumbnail-caption-title">Associação Pestalozzi de Porto Velho</h3>
-                                    <div class="mt-2">
-                                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger"><i class="zmdi zmdi-favorite"></i></a>
-                                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning"><i class="zmdi zmdi-star"></i></a>
-                                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success"><i class="zmdi zmdi-share"></i></a>
-                                    </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                        <div class="card-body">
-                            <h2><a href=javascript:void(0)>Bazar em prol da Associação Pestalozzi de Porto Velho</a></h2>
-                            <p>1º Bazar da Solidariedade da Associação Pestalozzi de Porto Velho com mais de 1000 itens novos e usados, modernos e vintages, para serem leiloados em favor dessa tão nobre e antiga organização solidária de nossa região.</p>
-                            <div class="row">
-                                <div class="col-lg-6 col-lg-4">
-                                    <div class="mt-05">
-                                        <a href="javascript:void(0)" class="ms-tag ms-tag-success">Bazar</a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-8">
-                                    <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Saiba mais <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+</div>
 
-                <div class="col-md-6 masonry-item wow fadeInUp animation-delay-2">
-                    <article class="card mb-4 wow materialUp animation-delay-5">
-                        <div class="js-player" data-plyr-provider="youtube" data-plyr-embed-id="o06UZfoHeLU"></div>
-                        <div class="card-body">
-                            <h2><a href=javascript:void(0)>Um mundo melhor mais próximo do que você imagina</a></h2>
-                            <p>Esse vídeo sintetiza nosso objetivo: fazer um mundo melhor para aqueles que precisam e para aqueles dispostos a se doar.</p>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-4">
-                                    <div class="mt-05">
-                                        <a href="javascript:void(0)" class="ms-tag ms-tag-info">Institucional</a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-8">
-                                    <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Saiba mais <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
-                                </div>
-                            </div>
+<p>&nbsp;</p>
+
+<div class="container">
+    <h2 class="right-line text-info">Regras para participação</h2>
+    <div class="row">
+        <div class="col-md-6 text-justify">
+            @Html.Raw(Model.Regras)
+        </div>
+        <div class="col-md-6">
+            <ul class="ms-timeline">
+                <li class="ms-timeline-item wow materialUp">
+                    <div class="ms-timeline-date">
+                        <time class="timeline-time" datetime="">
+                            Passo
+                            <span>1</span>
+                        </time>
+                        <i class="ms-timeline-point"></i>
+                        <img src="~/assets/img/Passo1.jpg" class="ms-timeline-point-img">
+                    </div>
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Registro no Bazar</h3>
                         </div>
-                    </article>
+                        <div class="card-body">
+                            Faça seu registro no Bazar informando eu Nome, Cpf, Email e Telefone,
+                            assim como uma senha de acesso (favor não compartilhar sua senha).
+                        </div>
+                    </div>
+                </li>
+                <li class="ms-timeline-item wow materialUp">
+                    <div class="ms-timeline-date">
+                        <time class="timeline-time" datetime="">
+                            Passo
+                            <span>2</span>
+                        </time>
+                        <i class="ms-timeline-point bg-warning"></i>
+                        <img src="~/assets/img/Passo2.jpg" class="ms-timeline-point-img">
+                    </div>
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Confirme seu e-mail</h3>
+                        </div>
+                        <div class="card-body">
+                            Após o registro, você receberá um email (verifique sua caixa de spam). Confirme os dados clicando no link enviado.
+                        </div>
+                    </div>
+                </li>
+                <li class="ms-timeline-item wow materialUp">
+                    <div class="ms-timeline-date">
+                        <time class="timeline-time" datetime="">
+                            Passo
+                            <span>3</span>
+                        </time>
+                        <i class="ms-timeline-point bg-royal"></i>
+                        <img src="~/assets/img/Passo3.jpg" class="ms-timeline-point-img">
+                    </div>
+                    <div class="card card-royal">
+                        <div class="card-header">
+                            <h3 class="card-title">Pesquise os produtos</h3>
+                        </div>
+                        <div class="card-body">
+                            Pesquise os itens do leilão acessando o <a asp-page="/Produtos">Leilão Virtual</a>. Você pode filtrar tanto por categoria quanto pelo estado.
+                        </div>
+                    </div>
+                </li>
+                <li class="ms-timeline-item wow materialUp">
+                    <div class="ms-timeline-date">
+                        <time class="timeline-time" datetime="">
+                            Passo
+                            <span>4</span>
+                        </time>
+                        <i class="ms-timeline-point bg-success"></i>
+                        <img src="~/assets/img/Passo4.jpg" class="ms-timeline-point-img">
+                    </div>
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Efetue seu lance</h3>
+                        </div>
+                        <div class="card-body">
+                            Ao efetuar o lance, confira atenciosamente o valor do mesmo. Você pode acompanhar todos os seus lances no link
+                            <a asp-page="/MeusLances">Meus Lances</a>.
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="wrap ms-hero-img-airplane ms-hero-bg-royal ms-bg-fixed">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="uppercase color-white">Bazar da Solidaridade</h2>
+            <p class="lead uppercase color-light">Algums de nossos números para o Bazar da Associação Pestalozzi</p>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="card card-royal card-body overflow-hidden text-center wow zoomInUp animation-delay-2">
+                    <h2 class="counter">@Model.Visualizacoes</h2>
+                    <i class="fa fa-4x fa-eye color-royal"></i>
+                    <p class="mt-2 no-mb lead small-caps">visualizações</p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="card card-success card-body overflow-hidden text-center wow zoomInUp animation-delay-5">
+                    <h2 class="counter">@Model.Lances</h2>
+                    <i class="fa fa-4x fa-gavel color-success"></i>
+                    <p class="mt-2 no-mb lead small-caps">lances</p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="card card-danger card-body overflow-hidden text-center wow zoomInUp animation-delay-4">
+                    <h2 class="counter">@Model.Produtos</h2>
+                    <i class="fa fa-4x fa-shopping-bag color-danger"></i>
+                    <p class="mt-2 no-mb lead small-caps">produtos</p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="card card-info card-body overflow-hidden text-center wow zoomInUp animation-delay-3">
+                    <h2 class="counter">@Model.Parceiros</h2>
+                    <i class="fa fa-4x fa-handshake-o color-info"></i>
+                    <p class="mt-2 no-mb lead small-caps">parceiros</p>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 

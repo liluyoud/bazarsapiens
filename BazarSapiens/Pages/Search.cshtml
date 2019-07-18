@@ -1,0 +1,58 @@
+﻿@page
+@model BazarSapiens.Pages.SearchModel
+@{
+    ViewData["Title"] = "Bazar - Consulta";
+}
+
+<div class="ms-hero-page-override ms-hero-img-city ms-hero-bg-primary">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">
+                Resultado da Pesquisa
+            </h1>
+            <p class="lead lead-lg color-white text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">
+                Consulte quaisquer informações sobre o nosso <span class="color-warning">Bazar da Solidariedade</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card card-hero animated slideInUp animation-delay-6">
+        <div class="card-body">
+            <form class="app-search" action="/Search" method="post">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" id="pesquisa" name="pesquisa" class="form-control" placeholder="Pesquisar por...">
+                        <span class="input-group-btn" title="Efetuar pesquisa">
+                            <button class="btn btn-info btn-raised" type="button">&nbsp;&nbsp;<i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card animated slideInUp animation-delay-7">
+        <div class="card-body">
+            <table class="table table-no-border">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th class="text-center">Valor do Último Lance</th>
+                        <th class="text-center">Data e Hora do Último Lance</th>
+                        <th class="text-center">Situação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TESTE</td>
+                        <td align="center">teste</td>
+                        <td align="center">teste</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

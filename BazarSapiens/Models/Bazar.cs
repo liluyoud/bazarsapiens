@@ -16,6 +16,8 @@ namespace BazarSapiens.Models
 
         public string Descricao { get; set; }
 
+        public string Regras { get; set; }
+
         public DateTime Inicio { get; set; }
 
         public DateTime Fim { get; set; }
