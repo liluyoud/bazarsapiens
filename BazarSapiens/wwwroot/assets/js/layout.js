@@ -2,6 +2,8 @@
     $('.cpf').mask('000.000.000-00', { reverse: true });
     $('.celular').mask("(00) 00000-0000", { placeholder: "(  )      -    " });
 
+    document.getElementById("sideMenuRegistrar").onclick = clickRegistrarUsuario;
+
     if (document.getElementById("registerPassword") !== null) {
         document.getElementById("registerPassword").onchange = validatePassword;
         document.getElementById("registerConfirmation").onkeyup = validatePassword;
@@ -45,4 +47,11 @@ function testaCPF() {
     if (Resto !== parseInt(strCPF.substring(10, 11))) erro = "CPF inválido";
 
     document.getElementById("registerCpf").setCustomValidity(erro);
+}
+
+function clickRegistrarUsuario() {
+    $('#linkTabLogin').removeClass("active");
+    $('#ms-login-tab').removeClass("active show");
+    $('#linkTabRegister').addClass("active");
+    $('#ms-register-tab').addClass("active show");
 }

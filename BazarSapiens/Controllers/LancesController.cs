@@ -30,40 +30,35 @@ namespace BazarSapiens.Controllers
             // verifica se existe o usuário e o produto
             var user = await _context.Usuarios.FirstOrDefaultAsync(u => u.UserName == usuario);
             var produto = await _context.Produtos.FirstOrDefaultAsync(p => p.Id == produtoId);
-            if (user == null || produto == null)
-                return dadosLance;
-
-            // grava o lance no bd
-            Lance lance = new Lance();
-            lance.ProdutoId = produtoId;
-            lance.Usuario = usuario;
-            lance.Valor = valorLance;
-            lance.DataHora = DateTime.Now;
-            _context.Lances.Add(lance);
-
-            // atualiza o produto
-            
-            produto.QuantidadeLances++;
-            if (produto.ValorAtual < valorLance)
+            if (user != null && produto != null && valorLance > produto.ValorAtual)
             {
+                // grava o lance no bd
+                Lance lance = new Lance();
+                lance.ProdutoId = produtoId;
+                lance.Usuario = usuario;
+                lance.Valor = valorLance;
+                lance.DataHora = DateTime.Now;
+                _context.Lances.Add(lance);
+
+                // atualiza o produto
+                produto.QuantidadeLances++;
                 produto.ValorAtual = valorLance;
                 produto.UsuarioUltimoLance = usuario;
+                _context.Attach(produto).State = EntityState.Modified;
+
+                // salva no banco de dados
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception ex) { }
+
+                dadosLance.Id = lance.Id;
+                dadosLance.ProdutoId = produtoId;
+                dadosLance.ValorLance = valorLance;
+                dadosLance.ValorAtual = valorLance;
+                dadosLance.Usuario = user.Nome;
             }
-            _context.Attach(produto).State = EntityState.Modified;
-
-            // salva no banco de dados
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex) { }
-
-            dadosLance.Id = lance.Id;
-            dadosLance.ProdutoId = produtoId;
-            dadosLance.ValorLance = valorLance;
-            dadosLance.ValorAtual = valorLance;
-            dadosLance.Usuario = user.Nome;
-
             return dadosLance;
         }
     }

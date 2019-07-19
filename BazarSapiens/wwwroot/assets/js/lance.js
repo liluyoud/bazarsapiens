@@ -26,11 +26,17 @@ function efetuarLance(produtoId, valorLance, usuario) {
             if (data.id !== 0) {
                 $('#usuarioUltimoLance').html(data.usuario);
                 $('#valorUltimoLance').html(data.valorLance);
-                $('#valorLance').val(data.valorLance+1);
+                $('#valorLance').val(data.valorLance + 1);
                 swal({
                     title: "Lance Efetivado",
                     text: data.usuario + ", seu lance foi registrado",
                     type: "success"
+                });
+            } else {
+                swal({
+                    title: "Erro no lance",
+                    text: "Seu lance não foi registrado",
+                    type: "error"
                 });
             }
         },
