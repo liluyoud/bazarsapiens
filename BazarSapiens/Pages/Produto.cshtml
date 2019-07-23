@@ -57,6 +57,9 @@
                         @Html.Raw(Model.Descricao)
                     </p>
                     <p>
+                        Estado do Produto: <strong>@Model.Produto.Estado</strong>
+                    </p>
+                    <p>
                         A forma de pagamento é a vista, cartão de débido ou crédito.
                     </p>
 
@@ -98,6 +101,11 @@
                         <a asp-page="/Produtos" class="btn-circle btn-circle-raised btn-circle-warning" title="Retornar ao Leilão"><i class="zmdi zmdi-mail-reply-all"></i></a>
                         &nbsp;&nbsp;&nbsp;
                         <a asp-page="/Lances" asp-route-id="@Model.Produto.Id" class="btn-circle btn-circle-raised btn-circle-warning" title="Mostrar todos os lances"><i class="zmdi zmdi-seat"></i></a>
+                        @if (User.IsInRole("Administradores"))
+                        {
+                            <span>&nbsp; &nbsp; &nbsp;</span>
+                            <a asp-page="/Admin/Produtos/Edit" asp-route-id="@Model.Produto.Id" class="btn-circle btn-circle-raised btn-circle-danger" title="Editar Produto"><i class="zmdi zmdi-edit"></i></a>
+                        }
                     </div>
 
                 </div>

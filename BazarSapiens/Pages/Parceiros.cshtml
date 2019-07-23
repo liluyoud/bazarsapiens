@@ -13,27 +13,46 @@
         </p>
     </div>
     <div class="row">
-        <div class="col">
-            <div class="row masonry-container">
-                @foreach (var item in Model.Parceiros)
-                {
-                    <div class="col-lg-4 col-md-6 masonry-item wow fadeInUp animation-delay-2">
-                        <div class="card">
-                            <figure class="ms-thumbnail ms-thumbnail-horizontal">
-                                <img src="~/parceiros/@item.Logotipo" alt="@item.Logotipo" class="img-fluid">
-                                <figcaption class="ms-thumbnail-caption text-center">
-                                    <div class="ms-thumbnail-caption-content">
-                                        <h4 class="ms-thumbnail-caption-title mb-2">@item.Nome</h4>
-                                        <a href="@item.Url" target="_blank" class="btn-circle btn-circle-raised btn-circle-xs mr-1 btn-circle-white color-danger">
-                                            <i class="zmdi zmdi-link"></i>
-                                        </a>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </div>
+        <div class="col-md-4">
+            <div class="card animated slideInUp animation-delay-7">
+                <div class="list-group">
+                    @foreach (var item in Model.Parceiros)
+                    {
+                        <a href="@item.Url" target="_blank" class="list-group-item list-group-action withripple">
+                            <h4 class="no-mb no-mt">@item.Nome</h4>
+                        </a>
+                    }
+                </div>
+            </div>
+
+           
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col">
+                    <div class="row masonry-container">
+                        @foreach (var item in Model.Parceiros)
+                        {
+                            <div class="col-lg-4 col-md-6 masonry-item wow fadeInUp animation-delay-2">
+                                <div class="card">
+                                    <figure class="ms-thumbnail ms-thumbnail-horizontal">
+                                        <img src="~/parceiros/@item.Logotipo" alt="@item.Logotipo" class="img-fluid">
+                                        <figcaption class="ms-thumbnail-caption text-center">
+                                            <div class="ms-thumbnail-caption-content">
+                                                <h4 class="ms-thumbnail-caption-title mb-2">@item.Nome</h4>
+                                                <a href="@item.Url" target="_blank" class="btn-circle btn-circle-raised btn-circle-xs mr-1 btn-circle-white color-danger">
+                                                    <i class="zmdi zmdi-link"></i>
+                                                </a>
+                                            </div>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        }
                     </div>
-                }
+                </div>
             </div>
         </div>
     </div>
+
 </div>

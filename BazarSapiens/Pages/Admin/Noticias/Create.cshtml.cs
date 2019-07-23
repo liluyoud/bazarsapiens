@@ -21,20 +21,19 @@ namespace BazarSapiens.Pages.Admin.Noticias
         {
             _context = context;
             _ambiente = ambiente;
-            Noticia = new Noticia();
         }
 
         public IActionResult OnGet()
         {
-            var agora = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
-            Noticia.DataPublicacao = DateTime.Parse(agora);
+            var agora = DateTime.Now;
+            Noticia.DataPublicacao = new DateTime(agora.Year, agora.Month, agora.Day, agora.Hour, agora.Minute, 0);
             Noticia.Autor = "Bazar da Solidariedade";
 
             return Page();
         }
 
         [BindProperty]
-        public Noticia Noticia { get; set; }
+        public Noticia Noticia { get; set; } = new Noticia();
 
         [BindProperty]
         public List<IFormFile> Arquivos { get; set; }

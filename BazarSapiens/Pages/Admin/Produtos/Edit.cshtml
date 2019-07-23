@@ -44,14 +44,14 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label asp-for="Produto.ValorInicial" class="control-label">Valor Inicial</label>
-                <input asp-for="Produto.ValorInicial" pattern="^[0-9]+(,[0-9]{1,2})?$" class="form-control" />
+                <input asp-for="Produto.ValorInicial" pattern="^[0-9]+(.[0-9]{1,2})?$" class="form-control" />
                 <span asp-validation-for="Produto.ValorInicial" class="text-danger"></span>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label asp-for="Produto.ValorLance" class="control-label">Valor do Lance</label>
-                <input asp-for="Produto.ValorLance" pattern="^[0-9]+(,[0-9]{1,2})?$" class="form-control" />
+                <input asp-for="Produto.ValorLance" pattern="^[0-9]+(.[0-9]{1,2})?$" class="form-control" />
                 <span asp-validation-for="Produto.ValorLance" class="text-danger"></span>
             </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label asp-for="Produto.ValorAtual" class="control-label">Valor Atual</label>
-                <input asp-for="Produto.ValorAtual" pattern="^[0-9]+(,[0-9]{1,2})?$" class="form-control" />
+                <input asp-for="Produto.ValorAtual" pattern="^[0-9]+(.[0-9]{1,2})?$" class="form-control" />
                 <span asp-validation-for="Produto.ValorAtual" class="text-danger"></span>
             </div>
         </div>
@@ -101,7 +101,7 @@
                         }
                         else
                         {
-                            <a href="javascript:void(0)" class="btn-circle btn-circle-danger btn-circle-raised btn-card-float wow zoomInDown">
+                            <a href="javascript:void(0)" onclick="clickExcluirFoto(this)" title="@item" class="btn-circle btn-circle-danger btn-circle-raised btn-card-float wow zoomInDown">
                                 <i class="zmdi zmdi-delete"></i>
                             </a>
                             <h4 class="color-danger">@item</h4>
@@ -155,6 +155,7 @@
 @section Scripts
 {
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="~/assets/js/produto.js"></script>
     <script>
         var simplemde = new SimpleMDE({ element: document.getElementById("Produto_Descricao") });
     </script>
