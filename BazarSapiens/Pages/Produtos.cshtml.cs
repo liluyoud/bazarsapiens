@@ -29,7 +29,7 @@ namespace BazarSapiens.Pages
         {
             var bazar = _context.Bazares.OrderByDescending(b => b.Id).FirstOrDefault(b => b.Situacao != SituacaoBazar.Finalizado && b.Situacao != SituacaoBazar.Cancelado);
 
-            Produtos = await _context.Produtos.Where(p => p.BazarId == bazar.Id).OrderByDescending(c => c.Visualizacoes).ToListAsync();
+            Produtos = await _context.Produtos.Where(p => p.BazarId == bazar.Id && p.ValorInicial > 0).OrderByDescending(c => c.Visualizacoes).ToListAsync();
             Categorias = await _context.Categorias.Where(c => c.BazarId == bazar.Id).OrderBy(c => c.Descricao).ToListAsync();
         }
 
